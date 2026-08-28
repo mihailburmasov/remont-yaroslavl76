@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+import { CONTACTS, SERVICE_LINKS, withBase } from "../lib/site";
+---
+
+<Layout title="Страница не найдена — ПРО Ремонт 76" description="Страница не найдена." noindex>
+	<section class="bg-ink text-paper">
+		<div class="container-page flex flex-col items-center py-24 text-center md:py-32">
+			<p class="text-7xl font-extrabold text-brand-yellow md:text-9xl">404</p>
+			<h1 class="mt-4 uppercase">Страница не найдена</h1>
+			<p class="mt-4 max-w-md text-white/70">
+				Такой страницы не существует или она была перемещена. Загляните на главную или в один
+				из разделов ниже.
+			</p>
+			<div class="mt-8 flex flex-wrap justify-center gap-4">
+				<Button href={withBase("/")} variant="primary">На главную</Button>
+				<Button href={CONTACTS.phoneHref} variant="outline">{CONTACTS.phone}</Button>
+			</div>
+
+			<div class="mt-12 flex flex-wrap justify-center gap-3">
+				{
+					SERVICE_LINKS.map((link) => (
+						<a
+							href={withBase(link.href)}
+							class="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-paper hover:border-brand-yellow hover:text-brand-yellow"
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>

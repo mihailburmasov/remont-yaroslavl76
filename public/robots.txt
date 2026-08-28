@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /styleguide
+
+Sitemap: https://pro-remont76.ru/sitemap-index.xml

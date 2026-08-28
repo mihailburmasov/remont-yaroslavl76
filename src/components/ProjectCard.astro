@@ -1,0 +1,57 @@
+---
+import type { Project } from "../lib/projects";
+import { withBase } from "../lib/site";
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+const cover = project.rooms[0];
+---
+
+<article
+	data-project-card
+	data-object-type={project.objectType}
+	data-level={project.level}
+	class="card overflow-hidden"
+>
+	<button
+		type="button"
+		data-lightbox-trigger
+		data-lightbox-src={withBase(cover.afterSrc)}
+		data-lightbox-caption={`${project.title} — ${cover.title}, после ремонта`}
+		class="block w-full"
+	>
+		<img
+			src={withBase(cover.afterSrc)}
+			alt={`${project.title} — ${cover.title}, после ремонта`}
+			width="1200"
+			height="900"
+			loading="lazy"
+			decoding="async"
+			class="aspect-[4/3] w-full object-cover"
+		/>
+	</button>
+
+	<div class="p-5">
+		<div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+			<span class="rounded bg-surface px-2 py-1 text-graphite">{project.objectType}</span>
+			<span class="rounded bg-ink px-2 py-1 text-paper">{project.level}</span>
+		</div>
+		<h3 class="mt-3 text-base font-bold">{project.title}</h3>
+		<dl class="mt-3 grid grid-cols-2 gap-2 text-xs text-muted">
+			<div>
+				<dt class="font-semibold text-graphite">Площадь</dt>
+				<dd>{project.area}</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-graphite">Срок</dt>
+				<dd>{project.term}</dd>
+			</div>
+		</dl>
+		<a href={withBase(`/portfolio/${project.slug}/`)} class="btn btn-outline mt-5 w-full border-ink text-ink hover:bg-ink hover:text-paper">
+			Смотреть проект
+		</a>
+	</div>
+</article>

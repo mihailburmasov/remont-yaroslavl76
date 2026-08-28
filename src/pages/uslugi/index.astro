@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import InnerHero from "../../components/layout/InnerHero.astro";
+import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
+import MiniCallbackForm from "../../components/MiniCallbackForm.astro";
+import { SERVICES } from "../../lib/services";
+import { withBase } from "../../lib/site";
+---
+
+<Layout
+	title="Услуги по ремонту квартир и домов в Ярославле — ПРО Ремонт 76"
+	description="Все виды ремонтных работ в Ярославле: под ключ, по дизайн-проекту, ремонт домов и коттеджей, косметический ремонт, ремонт ванной и санузла."
+>
+	<InnerHero
+		eyebrow="Услуги"
+		title="Виды ремонта, которые мы делаем"
+		lead="От косметического обновления до ремонта частного дома по дизайн-проекту — работаем в любом бюджете и на объектах любой сложности."
+	/>
+	<Breadcrumbs items={[{ label: "Услуги" }]} />
+
+	<Section tone="light">
+		<div class="grid gap-6 md:grid-cols-2">
+			{
+				SERVICES.map((service) => (
+					<article class="card flex flex-col p-6 md:p-8">
+						<h2 class="text-xl font-extrabold">{service.title}</h2>
+						<p class="mt-3 text-sm text-muted">{service.lead}</p>
+						<a
+							href={withBase(`/uslugi/${service.slug}/`)}
+							class="btn btn-outline mt-6 w-fit border-ink text-ink hover:bg-ink hover:text-paper"
+						>
+							Подробнее об услуге
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</Section>
+
+	<Section tone="surface">
+		<MiniCallbackForm source="uslugi-overview" />
+	</Section>
+</Layout>

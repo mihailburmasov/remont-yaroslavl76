@@ -1,0 +1,105 @@
+---
+import { CONTACTS, NAV_LINKS, SERVICE_LINKS, SITE, withBase } from "../../lib/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-paper">
+	<div class="container-page grid gap-12 py-16 md:grid-cols-4">
+		<div class="md:col-span-1">
+			<a href={withBase("/")} class="flex items-center gap-2 text-lg font-extrabold">
+				<span
+					class="flex h-9 w-9 items-center justify-center rounded bg-brand-yellow text-ink"
+					aria-hidden="true"
+				>
+					76
+				</span>
+				{SITE.name}
+			</a>
+			<p class="mt-4 max-w-xs text-sm text-white/60">
+				{SITE.description}
+			</p>
+			<div class="mt-6 flex gap-3">
+				<a
+					href={CONTACTS.whatsapp}
+					class="flex h-10 w-10 items-center justify-center rounded border border-white/15 hover:border-brand-yellow hover:text-brand-yellow"
+					aria-label="Написать в WhatsApp"
+				>
+					WA
+				</a>
+				<a
+					href={CONTACTS.telegram}
+					class="flex h-10 w-10 items-center justify-center rounded border border-white/15 hover:border-brand-yellow hover:text-brand-yellow"
+					aria-label="Написать в Telegram"
+				>
+					TG
+				</a>
+				<a
+					href={CONTACTS.vk}
+					class="flex h-10 w-10 items-center justify-center rounded border border-white/15 hover:border-brand-yellow hover:text-brand-yellow"
+					aria-label="Группа ВКонтакте"
+				>
+					VK
+				</a>
+			</div>
+		</div>
+
+		<nav aria-label="Навигация по сайту">
+			<h2 class="text-sm font-bold uppercase tracking-wide text-white/50">Навигация</h2>
+			<ul class="mt-4 flex flex-col gap-3 text-sm">
+				{
+					NAV_LINKS.filter((l) => l.href !== "/").map((link) => (
+						<li>
+							<a href={withBase(link.href)} class="text-white/80 hover:text-brand-yellow">
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<nav aria-label="Услуги">
+			<h2 class="text-sm font-bold uppercase tracking-wide text-white/50">Услуги</h2>
+			<ul class="mt-4 flex flex-col gap-3 text-sm">
+				{
+					SERVICE_LINKS.map((link) => (
+						<li>
+							<a href={withBase(link.href)} class="text-white/80 hover:text-brand-yellow">
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div>
+			<h2 class="text-sm font-bold uppercase tracking-wide text-white/50">Контакты</h2>
+			<ul class="mt-4 flex flex-col gap-3 text-sm text-white/80">
+				<li>
+					<a href={CONTACTS.phoneHref} class="font-bold text-paper hover:text-brand-yellow">
+						{CONTACTS.phone}
+					</a>
+				</li>
+				<li><a href={`mailto:${CONTACTS.email}`} class="hover:text-brand-yellow">{CONTACTS.email}</a></li>
+				<li>{CONTACTS.address}</li>
+				<li>{CONTACTS.workingHours}</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="border-t border-white/10">
+		<div
+			class="container-page flex flex-col gap-3 py-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between"
+		>
+			<p>© {year} {SITE.legalName}. Все права защищены.</p>
+			<div class="flex gap-4">
+				<a href={withBase("/politika-konfidencialnosti/")} class="hover:text-brand-yellow">
+					Политика конфиденциальности
+				</a>
+				<span>ОГРНИП / ИНН: {"{{INN}}"}</span>
+			</div>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import FloatingMessengers from "../components/layout/FloatingMessengers.astro";
+import Metrika from "../components/Metrika.astro";
+import { SITE, withBase } from "../lib/site";
+
+interface Props {
+	title: string;
+	description: string;
+	noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
+const ogImage = new URL(withBase("/og-cover.svg"), Astro.site ?? SITE.url);
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+		<link rel="canonical" href={canonicalURL} />
+		{noindex && <meta name="robots" content="noindex,follow" />}
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE.name} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:locale" content="ru_RU" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<meta name="generator" content={Astro.generator} />
+		<Metrika />
+	</head>
+	<body class="flex min-h-screen flex-col">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-brand-yellow focus:px-4 focus:py-2 focus:font-bold focus:text-ink"
+		>
+			Перейти к содержимому
+		</a>
+		<Header />
+		<main id="main-content" class="flex-1">
+			<slot />
+		</main>
+		<Footer />
+		<FloatingMessengers />
+	</body>
+</html>

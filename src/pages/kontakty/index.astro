@@ -1,0 +1,80 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import InnerHero from "../../components/layout/InnerHero.astro";
+import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import { CONTACTS, SERVICE_AREA_CITIES, withBase } from "../../lib/site";
+---
+
+<Layout
+	title="Контакты — ПРО Ремонт 76, ремонт квартир и домов в Ярославле"
+	description="Контакты ПРО Ремонт 76: телефон, WhatsApp, Telegram, адрес офиса в Ярославле. Оставьте заявку на бесплатный замер."
+>
+	<InnerHero
+		eyebrow="Контакты"
+		title="Свяжитесь с нами"
+		lead="Отвечаем в мессенджерах в течение рабочего дня, по телефону — сразу."
+	/>
+	<Breadcrumbs items={[{ label: "Контакты" }]} />
+
+	<Section tone="light" id="zayavka">
+		<div class="grid gap-12 md:grid-cols-2 md:items-start">
+			<div>
+				<h2>Как с нами связаться</h2>
+				<ul class="mt-6 flex flex-col gap-4 text-sm">
+					<li class="flex items-center gap-3">
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">Тел</span>
+						<a href={CONTACTS.phoneHref} class="font-bold">{CONTACTS.phone}</a>
+					</li>
+					<li class="flex items-center gap-3">
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">WA</span>
+						<a href={CONTACTS.whatsapp} class="font-semibold">WhatsApp</a>
+					</li>
+					<li class="flex items-center gap-3">
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">TG</span>
+						<a href={CONTACTS.telegram} class="font-semibold">Telegram</a>
+					</li>
+					<li class="flex items-center gap-3">
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">VK</span>
+						<a href={CONTACTS.vk} class="font-semibold">ВКонтакте</a>
+					</li>
+					<li class="flex items-center gap-3">
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">@</span>
+						<a href={`mailto:${CONTACTS.email}`} class="font-semibold">{CONTACTS.email}</a>
+					</li>
+				</ul>
+
+				<div class="mt-8 space-y-1 text-sm text-muted">
+					<p class="font-semibold text-graphite">{CONTACTS.address}</p>
+					<p>{CONTACTS.workingHours}</p>
+				</div>
+
+				<img
+					src={withBase("/images/map-placeholder.svg")}
+					alt="Карта проезда до офиса"
+					width="1200"
+					height="700"
+					loading="lazy"
+					class="mt-8 aspect-[16/9] w-full rounded-lg object-cover"
+				/>
+			</div>
+
+			<ContactForm source="kontakty" />
+		</div>
+	</Section>
+
+	<Section tone="surface">
+		<h2 class="max-w-2xl">Зона выезда по области</h2>
+		<p class="mt-4 max-w-2xl text-muted">
+			Выезжаем на замер и работаем на объектах не только в Ярославле, но и в области.
+		</p>
+		<ul class="mt-6 flex flex-wrap gap-3">
+			{
+				SERVICE_AREA_CITIES.map((city) => (
+					<li class="rounded-full border border-black/10 px-4 py-2 text-sm font-semibold">{city}</li>
+				))
+			}
+		</ul>
+	</Section>
+</Layout>

@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import InnerHero from "../../components/layout/InnerHero.astro";
+import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { PROJECTS } from "../../lib/projects";
+
+const objectTypes = ["Квартира", "Дом"];
+const levels = ["Бюджетный", "Комфорт", "Премиум"];
+---
+
+<Layout
+	title="Портфолио — примеры ремонта квартир и домов в Ярославле"
+	description="Портфолио выполненных объектов ПРО Ремонт 76: ремонт квартир и домов в Ярославле с фото до и после."
+>
+	<InnerHero
+		eyebrow="Портфолио"
+		title="Наши объекты"
+		lead="Фильтруйте по типу объекта и уровню ремонта, кликайте на фото, чтобы увидеть крупнее."
+	/>
+	<Breadcrumbs items={[{ label: "Портфолио" }]} />
+
+	<Section tone="light">
+		<div class="flex flex-wrap gap-6">
+			<div data-filter-group="objectType" class="flex flex-wrap items-center gap-2">
+				<span class="text-xs font-bold uppercase text-muted">Объект:</span>
+				<button type="button" data-filter-value="all" aria-pressed="true" class="btn btn-dark px-4 py-2 text-xs">
+					Все
+				</button>
+				{
+					objectTypes.map((type) => (
+						<button
+							type="button"
+							data-filter-value={type}
+							aria-pressed="false"
+							class="btn bg-transparent border border-black/15 px-4 py-2 text-xs text-graphite"
+						>
+							{type}
+						</button>
+					))
+				}
+			</div>
+
+			<div data-filter-group="level" class="flex flex-wrap items-center gap-2">
+				<span class="text-xs font-bold uppercase text-muted">Уровень:</span>
+				<button type="button" data-filter-value="all" aria-pressed="true" class="btn btn-dark px-4 py-2 text-xs">
+					Все
+				</button>
+				{
+					levels.map((level) => (
+						<button
+							type="button"
+							data-filter-value={level}
+							aria-pressed="false"
+							class="btn bg-transparent border border-black/15 px-4 py-2 text-xs text-graphite"
+						>
+							{level}
+						</button>
+					))
+				}
+			</div>
+		</div>
+
+		<div data-portfolio-grid class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{PROJECTS.map((project) => <ProjectCard project={project} />)}
+		</div>
+
+		<p data-portfolio-empty hidden class="mt-10 text-center text-muted">
+			По этому сочетанию фильтров пока нет проектов — уберите один из фильтров.
+		</p>
+	</Section>
+</Layout>
+
+<script src="../../scripts/portfolio-filter.ts"></script>
+<script src="../../scripts/lightbox.ts"></script>

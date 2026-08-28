@@ -1,0 +1,36 @@
+---
+import { withBase } from "../../lib/site";
+
+interface Crumb {
+	label: string;
+	href?: string;
+}
+
+interface Props {
+	items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Хлебные крошки" class="border-b border-black/5 bg-surface">
+	<ol class="container-page flex flex-wrap items-center gap-2 py-3 text-sm text-muted">
+		<li><a href={withBase("/")} class="hover:text-ink">Главная</a></li>
+		{
+			items.map((item, index) => (
+				<>
+					<li aria-hidden="true">/</li>
+					<li aria-current={index === items.length - 1 ? "page" : undefined}>
+						{item.href ? (
+							<a href={withBase(item.href)} class="hover:text-ink">
+								{item.label}
+							</a>
+						) : (
+							<span class="font-semibold text-ink">{item.label}</span>
+						)}
+					</li>
+				</>
+			))
+		}
+	</ol>
+</nav>

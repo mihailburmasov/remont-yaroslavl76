@@ -1,0 +1,373 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
+import BeforeAfterSlider from "../components/BeforeAfterSlider.astro";
+import ContactForm from "../components/ContactForm.astro";
+import MiniCallbackForm from "../components/MiniCallbackForm.astro";
+import {
+	ADVANTAGES,
+	CONTACTS,
+	FAQ,
+	REPAIR_LEVELS,
+	SERVICE_AREA_CITIES,
+	STATS,
+	TESTIMONIALS_PLACEHOLDER_COUNT,
+	withBase,
+	WORK_STAGES,
+} from "../lib/site";
+
+const portfolioExamples = [
+	{
+		slug: "kvartira-komfort-kukhnya",
+		title: "Кухня-гостиная, 24 м²",
+		level: "Комфорт",
+	},
+	{
+		slug: "dom-premium-gostinaya",
+		title: "Гостиная в частном доме, 38 м²",
+		level: "Премиум",
+	},
+	{
+		slug: "kvartira-byudzhet-vannaya",
+		title: "Санузел, 5 м²",
+		level: "Бюджетный",
+	},
+];
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "HomeAndConstructionBusiness",
+	name: "ПРО Ремонт 76",
+	image: new URL(withBase("/og-cover.svg"), Astro.site).toString(),
+	url: Astro.url.toString(),
+	telephone: "{{PHONE_E164}}",
+	priceRange: "{{PRICE_BUDGET}}–{{PRICE_PREMIUM}} ₽/м²",
+	areaServed: ["Ярославль", "Рыбинск", "Тутаев", "Переславль-Залесский", "Ростов", "Углич"],
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: "{{ADDRESS}}",
+		addressLocality: "Ярославль",
+		addressCountry: "RU",
+	},
+	openingHours: "{{WORKING_HOURS}}",
+};
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: FAQ.map((item) => ({
+		"@type": "Question",
+		name: item.question,
+		acceptedAnswer: { "@type": "Answer", text: item.answer },
+	})),
+};
+---
+
+<Layout
+	title="Ремонт квартир и домов под ключ в Ярославле — ПРО Ремонт 76"
+	description="Ремонт квартир и частных домов «под ключ» в Ярославле и области: косметический, капитальный, дизайнерский. Фиксированная смета, договор, гарантия."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} is:inline />
+
+	<!-- HERO -->
+	<section class="relative overflow-hidden bg-ink text-paper">
+		<div class="container-page grid gap-12 py-16 md:grid-cols-2 md:items-center md:py-24">
+			<div>
+				<p class="eyebrow text-white/60">Ярославль и область · ремонт под ключ</p>
+				<h1 class="mt-4 uppercase">
+					Ремонт, который<br />
+					<span class="text-brand-yellow">не нужно переделывать</span>
+				</h1>
+				<p class="mt-6 max-w-lg text-lg text-white/75">
+					Работаем в любом бюджете — от косметического обновления до дизайнерского ремонта под
+					ключ. Фиксируем смету в договоре и не меняем цену на середине объекта.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<Button href={withBase("/kontakty/#zayavka")} variant="primary">Заказать бесплатный замер</Button>
+					<Button href={CONTACTS.phoneHref} variant="outline">{CONTACTS.phone}</Button>
+				</div>
+
+				<dl class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+					{
+						STATS.map((stat) => (
+							<div class="min-w-0">
+								<dt class="sr-only">{stat.label}</dt>
+								<dd class="text-xl font-extrabold break-words text-brand-yellow md:text-2xl">
+									{stat.value}
+								</dd>
+								<dd class="mt-1 text-xs text-white/60">{stat.label}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
+
+			<div class="relative">
+				<img
+					src={withBase("/images/hero-cover.svg")}
+					alt="Пример ремонта квартиры — фото объекта"
+					width="1600"
+					height="1200"
+					loading="eager"
+					class="aspect-[4/3] w-full rounded-lg object-cover"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- ТРИ УРОВНЯ РЕМОНТА -->
+	<Section tone="light">
+		<p class="eyebrow">Работаем в любом бюджете</p>
+		<h2 class="mt-3 max-w-2xl">
+			Три уровня ремонта —{" "}
+			<span class="section-heading-mark">один надёжный подрядчик</span>
+		</h2>
+		<p class="mt-4 max-w-2xl text-muted">
+			Выбираете уровень исходя из бюджета и задач, мы подбираем материалы, состав бригады и сроки
+			под него — без компромиссов в качестве работ.
+		</p>
+
+		<div class="mt-10 grid gap-6 md:grid-cols-3">
+			{
+				REPAIR_LEVELS.map((level) => (
+					<div
+						class:list={[
+							"card flex flex-col p-6 md:p-8",
+							level.accent && "border-2 border-ink",
+						]}
+					>
+						{level.accent && (
+							<span class="mb-4 inline-flex w-fit rounded bg-brand-yellow px-3 py-1 text-xs font-bold text-ink">
+								Популярный выбор
+							</span>
+						)}
+						<h3>{level.title}</h3>
+						<p class="text-sm font-semibold text-muted">{level.subtitle}</p>
+						<p class="mt-4 text-sm text-graphite">{level.description}</p>
+
+						<p class="mt-6 text-3xl font-extrabold">
+							от {level.price}
+							<span class="text-base font-semibold text-muted"> {level.priceUnit}</span>
+						</p>
+
+						<ul class="mt-6 flex flex-1 flex-col gap-3 text-sm">
+							{level.features.map((feature) => (
+								<li class="flex items-start gap-2">
+									<svg
+										width="18"
+										height="18"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2.5"
+										class="mt-0.5 shrink-0 text-brand-yellow"
+									>
+										<path d="M5 13l4 4L19 7" />
+									</svg>
+									{feature}
+								</li>
+							))}
+						</ul>
+
+						<Button href={withBase("/ceny/")} variant={level.accent ? "dark" : "outline"} class={level.accent ? "" : "mt-8 border-ink text-ink hover:bg-ink hover:text-paper"}>
+							Подробнее о тарифе
+						</Button>
+					</div>
+				))
+			}
+		</div>
+
+		<p class="mt-8 text-sm text-muted">
+			Указанные цены — ориентировочные. Точную смету считаем после бесплатного замера объекта.
+		</p>
+	</Section>
+
+	<!-- ДО / ПОСЛЕ -->
+	<Section tone="surface">
+		<p class="eyebrow">Наши объекты</p>
+		<h2 class="mt-3 max-w-2xl">
+			Смотрите сами —{" "}
+			<span class="section-heading-mark">разница на реальных объектах</span>
+		</h2>
+		<p class="mt-4 max-w-2xl text-muted">
+			Потяните за разделитель, чтобы сравнить фото до и после ремонта.
+		</p>
+
+		<div class="mt-10 grid gap-8 md:grid-cols-3">
+			{
+				portfolioExamples.map((item) => (
+					<div>
+						<BeforeAfterSlider
+							beforeSrc={`/images/portfolio/${item.slug}-do.svg`}
+							afterSrc={`/images/portfolio/${item.slug}-posle.svg`}
+							beforeAlt={`${item.title} — до ремонта`}
+							afterAlt={`${item.title} — после ремонта`}
+							width={1200}
+							height={900}
+						/>
+						<h3 class="mt-4 text-base font-bold">{item.title}</h3>
+						<p class="text-sm text-muted">Уровень ремонта: {item.level}</p>
+					</div>
+				))
+			}
+		</div>
+
+		<div class="mt-10">
+			<Button href={withBase("/portfolio/")} variant="dark">Всё портфолио</Button>
+		</div>
+	</Section>
+
+	<!-- ЭТАПЫ РАБОТЫ -->
+	<Section tone="light">
+		<p class="eyebrow">Как мы работаем</p>
+		<h2 class="mt-3 max-w-2xl">
+			От замера до сдачи ключей —{" "}
+			<span class="section-heading-mark">шесть понятных этапов</span>
+		</h2>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				WORK_STAGES.map((stage) => (
+					<div class="flex gap-4">
+						<span class="text-3xl font-extrabold text-brand-yellow">{stage.number}</span>
+						<div>
+							<h3 class="text-base font-bold">{stage.title}</h3>
+							<p class="mt-2 text-sm text-muted">{stage.description}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</Section>
+
+	<!-- ПРЕИМУЩЕСТВА -->
+	<Section tone="dark">
+		<p class="eyebrow text-white/60">Почему выбирают нас</p>
+		<h2 class="mt-3 max-w-2xl">
+			Ремонт без нервотрёпки —{" "}
+			<span class="text-brand-yellow">и без сюрпризов в смете</span>
+		</h2>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				ADVANTAGES.map((advantage) => (
+					<div class="border-t-2 border-brand-yellow pt-4">
+						<h3 class="text-base font-bold text-paper">{advantage.title}</h3>
+						<p class="mt-2 text-sm text-white/65">{advantage.description}</p>
+					</div>
+				))
+			}
+		</div>
+	</Section>
+
+	<!-- МИНИ-ФОРМА №1 -->
+	<Section tone="light">
+		<MiniCallbackForm source="mini-callback-hero" />
+	</Section>
+
+	<!-- ОТЗЫВЫ -->
+	<Section tone="surface">
+		<p class="eyebrow">Отзывы</p>
+		<h2 class="mt-3 max-w-2xl">
+			Что говорят те,{" "}
+			<span class="section-heading-mark">кто уже сделал ремонт с нами</span>
+		</h2>
+
+		<div class="mt-10 grid gap-6 md:grid-cols-3">
+			{
+				Array.from({ length: TESTIMONIALS_PLACEHOLDER_COUNT }).map((_, index) => (
+					<figure class="card flex flex-col p-6">
+						<div class="flex items-center gap-3">
+							<div class="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-bold text-brand-yellow">
+								{`{{ИМЯ_${index + 1}}}`}
+							</div>
+							<div>
+								<figcaption class="text-sm font-bold">{`{{ИМЯ_КЛИЕНТА_${index + 1}}}`}</figcaption>
+								<p class="text-xs text-muted">{`{{ТИП_ОБЪЕКТА_${index + 1}}}`}</p>
+							</div>
+						</div>
+						<blockquote class="mt-4 flex-1 text-sm text-graphite">
+							{`{{ТЕКСТ_ОТЗЫВА_${index + 1}}}`}
+						</blockquote>
+					</figure>
+				))
+			}
+		</div>
+		<p class="mt-6 text-sm text-muted">
+			Отзывы — плейсхолдеры. Реальные тексты и имена клиентов см. в CONTENT-TODO.md.
+		</p>
+	</Section>
+
+	<!-- ГЕОГРАФИЯ -->
+	<Section tone="light">
+		<p class="eyebrow">География работы</p>
+		<h2 class="mt-3 max-w-2xl">Выезжаем по всей Ярославской области</h2>
+		<p class="mt-4 max-w-2xl text-muted">
+			Основные объекты — в Ярославле, но бригады регулярно выезжают и в другие города области.
+		</p>
+		<ul class="mt-6 flex flex-wrap gap-3">
+			{
+				SERVICE_AREA_CITIES.map((city) => (
+					<li class="rounded-full border border-black/10 px-4 py-2 text-sm font-semibold">
+						{city}
+					</li>
+				))
+			}
+		</ul>
+	</Section>
+
+	<!-- FAQ -->
+	<Section tone="surface">
+		<p class="eyebrow">Частые вопросы</p>
+		<h2 class="mt-3 max-w-2xl">Отвечаем до того, как вы спросите</h2>
+
+		<div class="mt-10 divide-y divide-black/10 border-t border-b border-black/10">
+			{
+				FAQ.map((item) => (
+					<details class="group py-5">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
+							{item.question}
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								class="shrink-0 transition-transform group-open:rotate-45"
+							>
+								<path d="M12 5v14M5 12h14" />
+							</svg>
+						</summary>
+						<p class="mt-3 text-sm text-muted">{item.answer}</p>
+					</details>
+				))
+			}
+		</div>
+	</Section>
+
+	<!-- ФИНАЛЬНАЯ ФОРМА -->
+	<Section tone="dark" id="zayavka">
+		<div class="grid gap-12 md:grid-cols-2 md:items-start">
+			<div>
+				<p class="eyebrow text-white/60">Бесплатный замер</p>
+				<h2 class="mt-3">
+					Начнём с бесплатного{" "}
+					<span class="text-brand-yellow">замера и консультации</span>
+				</h2>
+				<p class="mt-4 max-w-md text-white/70">
+					Оставьте заявку — приедем на объект, обсудим задачи и посчитаем предварительную смету
+					по выбранному уровню ремонта.
+				</p>
+				<div class="mt-8 flex flex-col gap-3 text-sm text-white/80">
+					<a href={CONTACTS.phoneHref} class="text-lg font-bold text-paper">{CONTACTS.phone}</a>
+					<span>{CONTACTS.address}</span>
+					<span>{CONTACTS.workingHours}</span>
+				</div>
+			</div>
+			<ContactForm source="homepage-final" />
+		</div>
+	</Section>
+</Layout>

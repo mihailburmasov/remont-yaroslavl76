@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="ПОСЛЕ">
+  <rect width="1200" height="900" fill="#111111"/>
+  <g opacity="0.5">
+    <line x1="0" y1="0" x2="0" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="900" stroke="#1F1F1F" stroke-width="1"/>
+  </g>
+  <rect x="0" y="0" width="1200" height="6" fill="#FFC700"/>
+  <text x="50%" y="46%" font-family="Manrope, Arial, sans-serif" font-size="55" font-weight="800" fill="#FFC700" text-anchor="middle" dominant-baseline="middle">ПОСЛЕ</text>
+  <text x="50%" y="56%" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="600" fill="#9CA3AF" text-anchor="middle" dominant-baseline="middle">Санузел, ремонт комфорт</text>
+</svg>

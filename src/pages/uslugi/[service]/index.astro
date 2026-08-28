@@ -1,0 +1,117 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Section from "../../../components/ui/Section.astro";
+import InnerHero from "../../../components/layout/InnerHero.astro";
+import Breadcrumbs from "../../../components/layout/Breadcrumbs.astro";
+import ContactForm from "../../../components/ContactForm.astro";
+import { SERVICES } from "../../../lib/services";
+import { withBase } from "../../../lib/site";
+
+export function getStaticPaths() {
+	return SERVICES.map((service) => ({
+		params: { service: service.slug },
+		props: { service },
+	}));
+}
+
+const { service } = Astro.props;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "Главная",
+			item: new URL(withBase("/"), Astro.site).toString(),
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "Услуги",
+			item: new URL(withBase("/uslugi/"), Astro.site).toString(),
+		},
+		{
+			"@type": "ListItem",
+			position: 3,
+			name: service.title,
+			item: new URL(withBase(`/uslugi/${service.slug}/`), Astro.site).toString(),
+		},
+	],
+};
+---
+
+<Layout title={`${service.title} в Ярославле — ПРО Ремонт 76`} description={service.metaDescription}>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+	<InnerHero eyebrow="Услуги" title={service.title} lead={service.lead} />
+	<Breadcrumbs items={[{ label: "Услуги", href: "/uslugi/" }, { label: service.shortTitle }]} />
+
+	<Section tone="light">
+		<div class="grid gap-12 md:grid-cols-3">
+			<div class="md:col-span-2">
+				<h2>Что входит в работы</h2>
+				<ul class="mt-6 flex flex-col gap-3">
+					{
+						service.includedWorks.map((work) => (
+							<li class="flex items-start gap-3 text-sm text-graphite">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2.5"
+									class="mt-0.5 shrink-0 text-brand-yellow"
+								>
+									<path d="M5 13l4 4L19 7" />
+								</svg>
+								{work}
+							</li>
+						))
+					}
+				</ul>
+
+				<h2 class="mt-12">Кому подходит</h2>
+				<ul class="mt-6 flex flex-col gap-3">
+					{
+						service.suitableFor.map((item) => (
+							<li class="flex items-start gap-3 text-sm text-graphite">
+								<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+								{item}
+							</li>
+						))
+					}
+				</ul>
+
+				<div class="mt-12 rounded-lg bg-surface p-6">
+					<p class="text-sm font-bold text-graphite">Рекомендуемый уровень ремонта</p>
+					<p class="mt-1 text-sm text-muted">{service.recommendedLevel}</p>
+					<p class="mt-4 text-sm text-muted">{service.note}</p>
+					<a href={withBase("/ceny/")} class="btn btn-dark mt-4 w-fit">Сравнить уровни ремонта</a>
+				</div>
+			</div>
+
+			<div>
+				<ContactForm source={`service-${service.slug}`} title="Узнать точную цену" description="Оставьте заявку — посчитаем смету под ваш объект." />
+			</div>
+		</div>
+	</Section>
+
+	<Section tone="dark">
+		<h2 class="max-w-2xl">Другие услуги</h2>
+		<div class="mt-8 flex flex-wrap gap-3">
+			{
+				SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
+					<a
+						href={withBase(`/uslugi/${s.slug}/`)}
+						class="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-paper hover:border-brand-yellow hover:text-brand-yellow"
+					>
+						{s.shortTitle}
+					</a>
+				))
+			}
+		</div>
+	</Section>
+</Layout>

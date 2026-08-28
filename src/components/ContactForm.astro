@@ -1,0 +1,140 @@
+---
+import { withBase } from "../lib/site";
+
+interface Props {
+	source?: string;
+	title?: string;
+	description?: string;
+};
+
+const {
+	source = "contact-form",
+	title = "Оставьте заявку на замер",
+	description = "Перезвоним в течение 15 минут и договоримся об удобном времени выезда специалиста.",
+} = Astro.props;
+
+const objectTypes = ["Квартира", "Частный дом", "Коммерческое помещение"];
+const levels = ["Бюджетный (косметический)", "Комфорт (капитальный)", "Премиум (дизайнерский)"];
+---
+
+<div class="card p-6 md:p-8">
+	<h3 class="text-xl font-extrabold md:text-2xl">{title}</h3>
+	<p class="mt-2 text-sm text-muted">{description}</p>
+
+	<form data-lead-form data-form-source={source} class="mt-6 flex flex-col gap-4" novalidate>
+		<div>
+			<label for={`${source}-name`} class="mb-1 block text-sm font-semibold">Имя</label>
+			<input
+				id={`${source}-name`}
+				name="name"
+				type="text"
+				autocomplete="name"
+				required
+				class="w-full rounded border border-black/15 px-4 py-3 text-base outline-none focus:border-ink"
+			/>
+			<p data-field-error class="mt-1 hidden text-sm font-semibold text-red-600"></p>
+		</div>
+
+		<div>
+			<label for={`${source}-phone`} class="mb-1 block text-sm font-semibold">Телефон</label>
+			<input
+				id={`${source}-phone`}
+				name="phone"
+				type="tel"
+				inputmode="tel"
+				autocomplete="tel"
+				placeholder="+7 (___) ___-__-__"
+				required
+				class="w-full rounded border border-black/15 px-4 py-3 text-base outline-none focus:border-ink"
+			/>
+			<p data-field-error class="mt-1 hidden text-sm font-semibold text-red-600"></p>
+		</div>
+
+		<div class="grid grid-cols-2 gap-4">
+			<div>
+				<label for={`${source}-objectType`} class="mb-1 block text-sm font-semibold">Объект</label>
+				<select
+					id={`${source}-objectType`}
+					name="objectType"
+					class="w-full rounded border border-black/15 px-3 py-3 text-sm outline-none focus:border-ink"
+				>
+					{objectTypes.map((type) => <option value={type}>{type}</option>)}
+				</select>
+			</div>
+			<div>
+				<label for={`${source}-area`} class="mb-1 block text-sm font-semibold">Площадь, м²</label>
+				<input
+					id={`${source}-area`}
+					name="area"
+					type="text"
+					inputmode="numeric"
+					placeholder="Например, 54"
+					class="w-full rounded border border-black/15 px-4 py-3 text-sm outline-none focus:border-ink"
+				/>
+			</div>
+		</div>
+
+		<div>
+			<label for={`${source}-level`} class="mb-1 block text-sm font-semibold">Желаемый уровень ремонта</label>
+			<select
+				id={`${source}-level`}
+				name="level"
+				class="w-full rounded border border-black/15 px-3 py-3 text-sm outline-none focus:border-ink"
+			>
+				{levels.map((level) => <option value={level}>{level}</option>)}
+			</select>
+		</div>
+
+		<div>
+			<label for={`${source}-comment`} class="mb-1 block text-sm font-semibold">
+				Комментарий <span class="font-normal text-muted">(необязательно)</span>
+			</label>
+			<textarea
+				id={`${source}-comment`}
+				name="comment"
+				rows="3"
+				class="w-full rounded border border-black/15 px-4 py-3 text-sm outline-none focus:border-ink"
+			></textarea>
+		</div>
+
+		<div class="hidden" aria-hidden="true">
+			<label for={`${source}-website`}>Сайт (не заполнять)</label>
+			<input id={`${source}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
+		</div>
+
+		<div>
+			<div class="flex items-start gap-3">
+				<input
+					id={`${source}-consent`}
+					name="consent"
+					type="checkbox"
+					required
+					class="mt-1 h-4 w-4 shrink-0"
+				/>
+				<label for={`${source}-consent`} class="text-xs text-muted">
+					Согласен(-на) на обработку персональных данных в соответствии с
+					<a href={withBase("/politika-konfidencialnosti/")} class="underline hover:text-ink">
+						политикой конфиденциальности
+					</a>
+				</label>
+			</div>
+			<p data-field-error class="mt-1 hidden text-sm font-semibold text-red-600"></p>
+		</div>
+
+		<button type="submit" class="btn btn-primary w-full">Отправить заявку</button>
+		<p data-form-error class="hidden text-sm font-semibold text-red-600" role="alert"></p>
+		<p class="text-center text-xs text-muted">Нажимая кнопку, вы не подписываетесь на рассылку — только заявка нам.</p>
+	</form>
+
+	<div data-form-success class="hidden py-6 text-center" role="status">
+		<div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow">
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="3">
+				<path d="M5 13l4 4L19 7"></path>
+			</svg>
+		</div>
+		<h3 class="mt-4 text-lg font-extrabold">Заявка отправлена</h3>
+		<p class="mt-2 text-sm text-muted">Перезвоним в ближайшее время. Если срочно — звоните сами по телефону в шапке сайта.</p>
+	</div>
+</div>
+
+<script src="../scripts/lead-form.ts"></script>
