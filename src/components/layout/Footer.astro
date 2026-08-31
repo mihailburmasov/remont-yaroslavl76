@@ -7,14 +7,15 @@ const year = new Date().getFullYear();
 <footer class="bg-ink text-paper">
 	<div class="container-page grid gap-12 py-16 md:grid-cols-4">
 		<div class="md:col-span-1">
-			<a href={withBase("/")} class="flex items-center gap-2 text-lg font-extrabold">
-				<span
-					class="flex h-9 w-9 items-center justify-center rounded bg-brand-yellow text-ink"
-					aria-hidden="true"
-				>
-					76
-				</span>
-				{SITE.name}
+			<a href={withBase("/")} class="flex items-center" aria-label={SITE.name}>
+				<img
+					src={withBase("/images/logo/logo-light.webp")}
+					alt={SITE.name}
+					width="1509"
+					height="637"
+					loading="lazy"
+					class="h-9 w-auto"
+				/>
 			</a>
 			<p class="mt-4 max-w-xs text-sm text-white/60">
 				{SITE.description}

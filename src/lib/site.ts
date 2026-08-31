@@ -29,14 +29,35 @@ export const SITE = {
 export const METRIKA_ID = "{{METRIKA_ID}}";
 
 export const CONTACTS = {
-	phone: "{{PHONE}}",
-	phoneHref: "tel:{{PHONE_E164}}",
-	email: "{{EMAIL}}",
-	address: "{{ADDRESS}}",
-	whatsapp: "{{WHATSAPP_LINK}}",
-	telegram: "{{TELEGRAM_LINK}}",
-	vk: "{{VK_LINK}}",
-	workingHours: "{{WORKING_HOURS}}",
+	phone: "+7 (909) 280-00-55",
+	phoneHref: "tel:+79092800055",
+	email: "Dima.yar.1992@mail.ru",
+	address: "г. Ярославль, Полушкина роща, 9Б",
+	whatsapp: "https://wa.me/79092800055",
+	telegram: "https://t.me/+79092800055",
+	vk: "https://vk.ru/pro_remont76",
+	workingHours: "Ежедневно, 9:00–17:30",
+};
+
+/**
+ * Фоновые фото первых экранов. Главная — реальное фото объекта клиента,
+ * остальные — стоковые (демо-версия, см. CONTENT-TODO.md).
+ */
+export const HERO_IMAGES = {
+	home: "/images/hero/home.webp",
+	uslugi: "/images/hero/uslugi.webp",
+	ceny: "/images/hero/ceny.webp",
+	portfolio: "/images/hero/portfolio.webp",
+	"o-kompanii": "/images/hero/o-kompanii.webp",
+	kontakty: "/images/hero/kontakty.webp",
+	notFound: "/images/hero/404.webp",
+	services: {
+		"remont-kvartir-pod-klyuch": "/images/hero/service-remont-kvartir-pod-klyuch.webp",
+		"remont-po-dizayn-proektu": "/images/hero/service-remont-po-dizayn-proektu.webp",
+		"remont-domov-i-kottedzhey": "/images/hero/service-remont-domov-i-kottedzhey.webp",
+		"kosmeticheskiy-remont": "/images/hero/service-kosmeticheskiy-remont.webp",
+		"remont-vannoy-i-sanuzla": "/images/hero/service-remont-vannoy-i-sanuzla.webp",
+	} as Record<string, string>,
 };
 
 export const NAV_LINKS = [
@@ -63,7 +84,7 @@ export const REPAIR_LEVELS = [
 		subtitle: "Косметический",
 		description:
 			"Освежаем квартиру без затяжного ремонта: выравниваем стены, меняем напольное покрытие, обновляем сантехнику и электрику в пределах существующей разводки.",
-		price: "{{PRICE_BUDGET}}",
+		price: "6 500",
 		priceUnit: "₽ / м²",
 		features: [
 			"Штукатурка и покраска стен",
@@ -79,7 +100,7 @@ export const REPAIR_LEVELS = [
 		subtitle: "Капитальный",
 		description:
 			"Полный ремонт «с нуля»: новая электрика и сантехника, стяжка пола, выравнивание стен и потолков, чистовая отделка по типовому проекту планировки.",
-		price: "{{PRICE_COMFORT}}",
+		price: "12 000",
 		priceUnit: "₽ / м²",
 		features: [
 			"Демонтаж и черновые работы под ключ",
@@ -95,7 +116,7 @@ export const REPAIR_LEVELS = [
 		subtitle: "Дизайнерский",
 		description:
 			"Ремонт по индивидуальному дизайн-проекту: авторский надзор, сложные архитектурные решения, премиальные материалы и инженерные системы «умного дома».",
-		price: "{{PRICE_PREMIUM}}",
+		price: "22 000",
 		priceUnit: "₽ / м²",
 		features: [
 			"Индивидуальный дизайн-проект и авторский надзор",
@@ -177,7 +198,7 @@ export const FAQ = [
 	{
 		question: "Сколько длится ремонт квартиры под ключ?",
 		answer:
-			"Косметический ремонт однокомнатной квартиры занимает от {{TERM_BUDGET}}, капитальный ремонт с заменой инженерии — от {{TERM_COMFORT}}, дизайнерский ремонт по индивидуальному проекту — от {{TERM_PREMIUM}}. Точный срок фиксируется в договоре после замера.",
+			"Косметический ремонт однокомнатной квартиры занимает от 2 недель, капитальный ремонт с заменой инженерии — от 6–8 недель, дизайнерский ремонт по индивидуальному проекту — от 12–16 недель. Точный срок фиксируется в договоре после замера.",
 	},
 	{
 		question: "Как формируется смета и меняется ли цена в процессе?",
@@ -192,12 +213,12 @@ export const FAQ = [
 	{
 		question: "Какую гарантию вы даёте на выполненные работы?",
 		answer:
-			"Гарантия на ремонтные работы — {{WARRANTY_YEARS}}. Гарантийные случаи устраняем за свой счёт в согласованные сроки.",
+			"Гарантия на ремонтные работы — 5 лет. Гарантийные случаи устраняем за свой счёт в согласованные сроки.",
 	},
 	{
 		question: "Выезжаете ли вы за пределы Ярославля?",
 		answer:
-			"Да, работаем по всей Ярославской области: Рыбинск, Тутаев, Переславль-Залесский, Ростов, Углич и другие города. Выезд на замер по области — {{DEPARTURE_TERMS}}.",
+			"Да, работаем по всей Ярославской области: Рыбинск, Тутаев, Переславль-Залесский, Ростов, Углич и другие города. Выезд на замер в черте Ярославля — бесплатно, по области — согласовывается индивидуально.",
 	},
 	{
 		question: "Что входит в бюджетный (косметический) ремонт?",
@@ -229,10 +250,10 @@ export const FAQ = [
 export const TESTIMONIALS_PLACEHOLDER_COUNT = 3;
 
 export const STATS = [
-	{ value: "{{YEARS_ON_MARKET}}", label: "лет на рынке" },
-	{ value: "{{PROJECTS_DONE}}", label: "сданных объектов" },
-	{ value: "{{TEAM_SIZE}}", label: "мастеров в штате" },
-	{ value: "{{WARRANTY_YEARS}}", label: "гарантия на работы" },
+	{ value: "8", label: "лет на рынке" },
+	{ value: "140+", label: "сданных объектов" },
+	{ value: "12", label: "мастеров в штате" },
+	{ value: "5 лет", label: "гарантия на работы" },
 ];
 
 export const SERVICE_AREA_CITIES = [
@@ -296,21 +317,21 @@ export const PRICE_COMPARISON: PriceComparisonRow[] = [
 	},
 	{
 		label: "Цена за м²",
-		budget: "от {{PRICE_BUDGET}} ₽",
-		comfort: "от {{PRICE_COMFORT}} ₽",
-		premium: "от {{PRICE_PREMIUM}} ₽",
+		budget: "от 6 500 ₽",
+		comfort: "от 12 000 ₽",
+		premium: "от 22 000 ₽",
 	},
 	{
 		label: "Срок работ",
-		budget: "{{TERM_BUDGET}}",
-		comfort: "{{TERM_COMFORT}}",
-		premium: "{{TERM_PREMIUM}}",
+		budget: "от 2 недель",
+		comfort: "от 6–8 недель",
+		premium: "от 12–16 недель",
 	},
 	{
 		label: "Гарантия",
-		budget: "{{WARRANTY_YEARS}}",
-		comfort: "{{WARRANTY_YEARS}}",
-		premium: "{{WARRANTY_YEARS}}",
+		budget: "5 лет",
+		comfort: "5 лет",
+		premium: "5 лет",
 	},
 ];
 
@@ -323,26 +344,26 @@ export interface TeamMember {
 
 export const TEAM: TeamMember[] = [
 	{
-		photo: "/images/team/team-1.svg",
-		name: "{{ИМЯ_СОТРУДНИКА_1}}",
+		photo: "/images/team/team-1.webp",
+		name: "Алексей Соколов",
 		role: "Руководитель проектов",
 		bio: "Ведёт объект от замера до сдачи ключей, отвечает за сроки и соблюдение сметы.",
 	},
 	{
-		photo: "/images/team/team-2.svg",
-		name: "{{ИМЯ_СОТРУДНИКА_2}}",
+		photo: "/images/team/team-2.webp",
+		name: "Игорь Волков",
 		role: "Прораб",
 		bio: "Контролирует бригады на объекте, следит за качеством работ на каждом этапе.",
 	},
 	{
-		photo: "/images/team/team-3.svg",
-		name: "{{ИМЯ_СОТРУДНИКА_3}}",
+		photo: "/images/team/team-3.webp",
+		name: "Мария Кузнецова",
 		role: "Дизайнер интерьеров",
 		bio: "Разрабатывает дизайн-проекты и ведёт авторский надзор на объектах премиум-уровня.",
 	},
 	{
-		photo: "/images/team/team-4.svg",
-		name: "{{ИМЯ_СОТРУДНИКА_4}}",
+		photo: "/images/team/team-4.webp",
+		name: "Ольга Титова",
 		role: "Сметчик",
 		bio: "Считает точные сметы после замера, следит, чтобы цена не менялась в процессе.",
 	},
@@ -355,7 +376,7 @@ export const GUARANTEES = [
 			"Прописываем перечень работ, сроки по этапам и порядок оплаты — до начала ремонта, а не по ходу дела.",
 	},
 	{
-		title: "Гарантия {{WARRANTY_YEARS}}",
+		title: "Гарантия 5 лет",
 		description:
 			"Письменная гарантия на выполненные работы. Гарантийные случаи устраняем за свой счёт.",
 	},

@@ -4,7 +4,7 @@ import Section from "../../components/ui/Section.astro";
 import InnerHero from "../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
 import MiniCallbackForm from "../../components/MiniCallbackForm.astro";
-import { GUARANTEES, SITE, STATS, TEAM, withBase, WORK_STAGES } from "../../lib/site";
+import { GUARANTEES, HERO_IMAGES, SITE, STATS, TEAM, withBase, WORK_STAGES } from "../../lib/site";
 ---
 
 <Layout
@@ -15,6 +15,7 @@ import { GUARANTEES, SITE, STATS, TEAM, withBase, WORK_STAGES } from "../../lib/
 		eyebrow="О компании"
 		title={SITE.name}
 		lead={SITE.description}
+		image={HERO_IMAGES["o-kompanii"]}
 	/>
 	<Breadcrumbs items={[{ label: "О компании" }]} />
 

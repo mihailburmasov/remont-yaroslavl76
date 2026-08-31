@@ -5,7 +5,7 @@ import InnerHero from "../../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../../components/layout/Breadcrumbs.astro";
 import ContactForm from "../../../components/ContactForm.astro";
 import { SERVICES } from "../../../lib/services";
-import { withBase } from "../../../lib/site";
+import { HERO_IMAGES, withBase } from "../../../lib/site";
 
 export function getStaticPaths() {
 	return SERVICES.map((service) => ({
@@ -45,7 +45,12 @@ const jsonLd = {
 <Layout title={`${service.title} в Ярославле — ПРО Ремонт 76`} description={service.metaDescription}>
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
-	<InnerHero eyebrow="Услуги" title={service.title} lead={service.lead} />
+	<InnerHero
+		eyebrow="Услуги"
+		title={service.title}
+		lead={service.lead}
+		image={HERO_IMAGES.services[service.slug]}
+	/>
 	<Breadcrumbs items={[{ label: "Услуги", href: "/uslugi/" }, { label: service.shortTitle }]} />
 
 	<Section tone="light">

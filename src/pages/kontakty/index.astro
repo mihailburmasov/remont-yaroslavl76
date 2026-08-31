@@ -4,7 +4,7 @@ import Section from "../../components/ui/Section.astro";
 import InnerHero from "../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
 import ContactForm from "../../components/ContactForm.astro";
-import { CONTACTS, SERVICE_AREA_CITIES, withBase } from "../../lib/site";
+import { CONTACTS, HERO_IMAGES, SERVICE_AREA_CITIES, withBase } from "../../lib/site";
 ---
 
 <Layout
@@ -15,6 +15,7 @@ import { CONTACTS, SERVICE_AREA_CITIES, withBase } from "../../lib/site";
 		eyebrow="Контакты"
 		title="Свяжитесь с нами"
 		lead="Отвечаем в мессенджерах в течение рабочего дня, по телефону — сразу."
+		image={HERO_IMAGES.kontakty}
 	/>
 	<Breadcrumbs items={[{ label: "Контакты" }]} />
 

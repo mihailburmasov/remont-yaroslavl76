@@ -4,7 +4,7 @@ import Section from "../../components/ui/Section.astro";
 import InnerHero from "../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
 import MiniCallbackForm from "../../components/MiniCallbackForm.astro";
-import { PRICE_COMPARISON, REPAIR_LEVELS, withBase } from "../../lib/site";
+import { HERO_IMAGES, PRICE_COMPARISON, REPAIR_LEVELS, withBase } from "../../lib/site";
 ---
 
 <Layout
@@ -15,6 +15,7 @@ import { PRICE_COMPARISON, REPAIR_LEVELS, withBase } from "../../lib/site";
 		eyebrow="Цены"
 		title="Сколько стоит ремонт"
 		lead="Три уровня ремонта под разный бюджет. Указанные цены — ориентировочные, точную смету считаем после бесплатного замера объекта."
+		image={HERO_IMAGES.ceny}
 	/>
 	<Breadcrumbs items={[{ label: "Цены" }]} />
 

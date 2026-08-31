@@ -5,7 +5,7 @@ import InnerHero from "../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
 import MiniCallbackForm from "../../components/MiniCallbackForm.astro";
 import { SERVICES } from "../../lib/services";
-import { withBase } from "../../lib/site";
+import { HERO_IMAGES, withBase } from "../../lib/site";
 ---
 
 <Layout
@@ -16,6 +16,7 @@ import { withBase } from "../../lib/site";
 		eyebrow="Услуги"
 		title="Виды ремонта, которые мы делаем"
 		lead="От косметического обновления до ремонта частного дома по дизайн-проекту — работаем в любом бюджете и на объектах любой сложности."
+		image={HERO_IMAGES.uslugi}
 	/>
 	<Breadcrumbs items={[{ label: "Услуги" }]} />
 

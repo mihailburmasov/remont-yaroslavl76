@@ -1,12 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
-import { CONTACTS, SERVICE_LINKS, withBase } from "../lib/site";
+import { CONTACTS, HERO_IMAGES, SERVICE_LINKS, withBase } from "../lib/site";
 ---
 
 <Layout title="Страница не найдена — ПРО Ремонт 76" description="Страница не найдена." noindex>
-	<section class="bg-ink text-paper">
-		<div class="container-page flex flex-col items-center py-24 text-center md:py-32">
+	<section class="relative overflow-hidden bg-ink text-paper">
+		<img
+			src={withBase(HERO_IMAGES.notFound)}
+			alt=""
+			width="1920"
+			height="1080"
+			loading="eager"
+			class="absolute inset-0 h-full w-full object-cover"
+		/>
+		<div class="absolute inset-0 bg-ink/85" aria-hidden="true"></div>
+		<div class="relative container-page flex flex-col items-center py-24 text-center md:py-32">
 			<p class="text-7xl font-extrabold text-brand-yellow md:text-9xl">404</p>
 			<h1 class="mt-4 uppercase">Страница не найдена</h1>
 			<p class="mt-4 max-w-md text-white/70">
