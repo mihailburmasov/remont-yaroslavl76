@@ -22,6 +22,31 @@ const ogImage = new URL(withBase("/og-cover.jpg"), Astro.site ?? SITE.url);
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script is:inline>
+			/**
+			 * Самовосстановление после деплоя: у CSS/JS-файлов хэшированные имена, и на
+			 * GitHub Pages HTML и статика кэшируются одинаково (10 минут). Если браузер
+			 * открыл страницу из кэша, а после нового деплоя старый файл уже удалён —
+			 * получаем 404 и «голую» вёрстку без стилей. При такой ошибке загрузки
+			 * перезагружаем страницу один раз — обычный reload всегда идёт на сервер за
+			 * актуальным HTML, который уже ссылается на существующие файлы.
+			 */
+			(function () {
+				var KEY = "assetReloadTs";
+				var last = Number(sessionStorage.getItem(KEY) || 0);
+				if (Date.now() - last < 5000) return;
+				window.addEventListener(
+					"error",
+					function (event) {
+						var target = event.target;
+						if (!target || (target.tagName !== "LINK" && target.tagName !== "SCRIPT")) return;
+						sessionStorage.setItem(KEY, String(Date.now()));
+						location.reload();
+					},
+					true,
+				);
+			})();
+		</script>
 		<link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
 		<link rel="canonical" href={canonicalURL} />
 		{noindex && <meta name="robots" content="noindex,follow" />}
