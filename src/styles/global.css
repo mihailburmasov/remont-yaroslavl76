@@ -1,16 +1,13 @@
 @import "tailwindcss";
 @import "@fontsource-variable/manrope";
-@import "@fontsource-variable/unbounded";
 
 /*
   Дизайн-система «ПРО Ремонт 76».
   Палитра и типографика зафиксированы в ТЗ (Промт.md) — жёлтый только как акцент,
   никогда не как фон под текстом; все пары текст/фон проходят WCAG AA.
-  Заголовки — Unbounded (тот же плотный «рекламный» шрифт, что в группе ВК), текст — Manrope.
 */
 @theme {
 	--font-sans: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, sans-serif;
-	--font-heading: "Unbounded Variable", "Unbounded", "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
 
 	--color-brand-yellow: #ffc700;
 	--color-brand-yellow-light: #ffd84d;
@@ -38,22 +35,21 @@
 	h2,
 	h3,
 	h4 {
-		font-family: var(--font-heading);
-		font-weight: 700;
+		font-weight: 800;
 		letter-spacing: -0.01em;
 		line-height: 1.1;
 	}
 
 	h1 {
-		font-size: clamp(2rem, 1.5rem + 2.4vw, 4rem);
+		font-size: clamp(2.25rem, 1.6rem + 3vw, 4.5rem);
 	}
 
 	h2 {
-		font-size: clamp(1.5rem, 1.3rem + 1.3vw, 2.5rem);
+		font-size: clamp(1.75rem, 1.4rem + 1.6vw, 3rem);
 	}
 
 	h3 {
-		font-size: clamp(1.15rem, 1.05rem + 0.6vw, 1.5rem);
+		font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
 	}
 
 	:focus-visible {
