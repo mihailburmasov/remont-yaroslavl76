@@ -135,7 +135,7 @@ const faqJsonLd = {
 		/>
 		<div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/55" aria-hidden="true"></div>
 
-		<div class="relative container-page grid gap-8 py-10 md:grid-cols-[1.15fr_0.85fr] md:items-center md:py-14 lg:py-16">
+		<div class="relative container-page grid gap-[clamp(1.5rem,4vh,2rem)] py-[clamp(1.5rem,5vh,4rem)] md:grid-cols-[1.15fr_0.85fr] md:items-center">
 			<div>
 				<p class="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/30 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-white/85">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="shrink-0">
@@ -144,20 +144,20 @@ const faqJsonLd = {
 					</svg>
 					Ярославль и область
 				</p>
-				<h1 class="mt-3 text-4xl uppercase md:text-5xl lg:text-6xl">Ремонт квартир и домов под ключ</h1>
-				<p class="mt-2 text-xl font-extrabold text-brand-yellow md:text-2xl lg:text-3xl">
+				<h1 class="mt-[clamp(0.75rem,2vh,1.25rem)] text-4xl uppercase md:text-5xl lg:text-6xl">Ремонт квартир и домов под ключ</h1>
+				<p class="mt-[clamp(0.5rem,1.5vh,1rem)] text-xl font-extrabold text-brand-yellow md:text-2xl lg:text-3xl">
 					ПроРемонт — делаем ремонт лёгким!
 				</p>
-				<p class="mt-4 max-w-lg text-base text-white/75 md:text-lg">
+				<p class="mt-[clamp(0.75rem,2vh,1.5rem)] max-w-lg text-base text-white/75 md:text-lg">
 					Работаем в любом бюджете — от косметического обновления до дизайнерского ремонта под
 					ключ. Фиксируем смету в договоре и не меняем цену на середине объекта.
 				</p>
-				<div class="mt-6 flex flex-wrap gap-4">
+				<div class="mt-[clamp(1rem,3vh,2.5rem)] flex flex-wrap gap-4">
 					<Button href={withBase("/kontakty/#zayavka")} variant="primary">Заказать бесплатный замер</Button>
 					<Button href={CONTACTS.phoneHref} variant="outline">{CONTACTS.phone}</Button>
 				</div>
 
-				<dl class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+				<dl class="mt-[clamp(1.5rem,4.5vh,3.5rem)] grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
 					{
 						STATS.map((stat) => (
 							<div class="min-w-0">
@@ -175,7 +175,7 @@ const faqJsonLd = {
 			<div class="grid grid-cols-2 gap-3">
 				{
 					TRUST_BADGES.map((badge) => (
-						<div class="rounded-lg border border-white/15 bg-black/35 p-4 backdrop-blur-sm">
+						<div class="rounded-lg border border-white/15 bg-black/35 p-[clamp(0.875rem,2.5vh,1.5rem)] backdrop-blur-sm">
 							<p class="text-sm font-extrabold text-brand-yellow">{badge.title}</p>
 							<p class="mt-1 text-xs text-white/70">{badge.subtitle}</p>
 						</div>
