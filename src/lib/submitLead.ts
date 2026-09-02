@@ -1,10 +1,13 @@
 /**
- * Единая точка отправки заявок. Сейчас endpoint — плейсхолдер,
- * позже сюда подставляется Formspree / Telegram-бот / почтовый сервис
- * без изменения кода форм.
+ * Единая точка отправки заявок. Используем FormSubmit.co (без бэкенда и регистрации) —
+ * форма пересылается на почту заказчика. При первой реальной заявке FormSubmit присылает
+ * на эту почту письмо с подтверждением — его нужно один раз открыть и подтвердить,
+ * иначе письма с заявками не будут приходить.
  */
 
-const FORM_ENDPOINT = "{{FORM_ENDPOINT}}";
+import { CONTACTS } from "./site";
+
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACTS.email}`;
 
 export interface LeadPayload {
 	name: string;
@@ -17,17 +20,13 @@ export interface LeadPayload {
 }
 
 export async function submitLead(payload: LeadPayload): Promise<{ ok: boolean }> {
-	if (FORM_ENDPOINT.startsWith("{{")) {
-		console.warn(
-			"[submitLead] FORM_ENDPOINT не настроен — заявка не отправлена. См. CONTENT-TODO.md.",
-		);
-		return { ok: true };
-	}
-
 	const response = await fetch(FORM_ENDPOINT, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(payload),
+		body: JSON.stringify({
+			...payload,
+			_subject: `Новая заявка с сайта ПроРемонт — ${payload.source}`,
+		}),
 	});
 
 	return { ok: response.ok };
