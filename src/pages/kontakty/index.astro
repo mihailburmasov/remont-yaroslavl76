@@ -13,7 +13,7 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 
 <Layout
 	title="Контакты — ПроРемонт, ремонт квартир и домов в Ярославле"
-	description="Контакты ПроРемонт: телефон, WhatsApp, Telegram, адрес офиса в Ярославле. Оставьте заявку на бесплатный замер."
+	description="Контакты ПроРемонт: телефон, MAX, ВКонтакте, адрес офиса в Ярославле. Оставьте заявку на бесплатный замер."
 >
 	<InnerHero
 		eyebrow="Контакты"
@@ -33,20 +33,12 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 						<a href={CONTACTS.phoneHref} class="font-bold">{CONTACTS.phone}</a>
 					</li>
 					<li class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">WA</span>
-						<a href={CONTACTS.whatsapp} class="font-semibold">WhatsApp</a>
-					</li>
-					<li class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">TG</span>
-						<a href={CONTACTS.telegram} class="font-semibold">Telegram</a>
+						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-xs font-bold">MAX</span>
+						<a href={CONTACTS.max} class="font-semibold">MAX</a>
 					</li>
 					<li class="flex items-center gap-3">
 						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">VK</span>
 						<a href={CONTACTS.vk} class="font-semibold">ВКонтакте</a>
-					</li>
-					<li class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">@</span>
-						<a href={`mailto:${CONTACTS.email}`} class="font-semibold">{CONTACTS.email}</a>
 					</li>
 				</ul>
 

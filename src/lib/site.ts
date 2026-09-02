@@ -30,10 +30,8 @@ export const METRIKA_ID = "{{METRIKA_ID}}";
 export const CONTACTS = {
 	phone: "+7 (909) 280-00-55",
 	phoneHref: "tel:+79092800055",
-	email: "Dima.yar.1992@mail.ru",
 	address: "г. Ярославль, Полушкина роща, 9Б",
-	whatsapp: "https://wa.me/79092800055",
-	telegram: "https://t.me/+79092800055",
+	max: "https://max.ru/u/f9LHodD0cOLcZDd5jWmkF8yLOucnEfilLpe_TVt-AOQqzoIRGYw3dODYyqg",
 	vk: "https://vk.ru/pro_remont76",
 	workingHours: "Ежедневно, 9:00–17:30",
 };

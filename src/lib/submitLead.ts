@@ -1,13 +1,14 @@
 /**
  * Единая точка отправки заявок. Используем FormSubmit.co (без бэкенда и регистрации) —
- * форма пересылается на почту заказчика. При первой реальной заявке FormSubmit присылает
- * на эту почту письмо с подтверждением — его нужно один раз открыть и подтвердить,
+ * форма пересылается на почту заказчика. Эта почта — служебный адрес доставки заявок,
+ * нигде на сайте публично не показывается. При первой реальной заявке FormSubmit присылает
+ * на неё письмо с подтверждением — его нужно один раз открыть и подтвердить,
  * иначе письма с заявками не будут приходить.
  */
 
-import { CONTACTS } from "./site";
+const LEAD_DELIVERY_EMAIL = "Dima.yar.1992@mail.ru";
 
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACTS.email}`;
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${LEAD_DELIVERY_EMAIL}`;
 
 export interface LeadPayload {
 	name: string;
