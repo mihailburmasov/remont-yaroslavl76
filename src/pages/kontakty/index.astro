@@ -32,13 +32,17 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">Тел</span>
 						<a href={CONTACTS.phoneHref} class="font-bold">{CONTACTS.phone}</a>
 					</li>
-					<li class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-xs font-bold">MAX</span>
-						<a href={CONTACTS.max} class="font-semibold">MAX</a>
+					<li>
+						<a href={CONTACTS.max} class="group flex items-center gap-3 w-fit">
+							<span class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#471AFF] to-[#9500FF] text-xs font-bold text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-hover:shadow-lg">MAX</span>
+							<span class="font-semibold">MAX</span>
+						</a>
 					</li>
-					<li class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-bold">VK</span>
-						<a href={CONTACTS.vk} class="font-semibold">ВКонтакте</a>
+					<li>
+						<a href={CONTACTS.vk} class="group flex items-center gap-3 w-fit">
+							<span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#0077FF] font-bold text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-hover:shadow-lg">VK</span>
+							<span class="font-semibold">ВКонтакте</span>
+						</a>
 					</li>
 				</ul>
 
