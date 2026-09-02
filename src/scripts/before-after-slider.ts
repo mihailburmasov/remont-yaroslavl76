@@ -26,7 +26,7 @@ function initSlider(root: HTMLElement): void {
 
 	function setPosition(next: number): void {
 		position = clamp(next, 0, 100);
-		clip.style.width = `${position}%`;
+		clip.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
 		handle.style.left = `${position}%`;
 		handle.setAttribute("aria-valuenow", String(Math.round(position)));
 	}

@@ -5,7 +5,7 @@ import InnerHero from "../../components/layout/InnerHero.astro";
 import Breadcrumbs from "../../components/layout/Breadcrumbs.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { PROJECTS } from "../../lib/projects";
-import { HERO_IMAGES } from "../../lib/site";
+import { CONTACTS, HERO_IMAGES } from "../../lib/site";
 
 const objectTypes = ["Квартира", "Дом"];
 const levels = ["Бюджетный", "Косметический", "Дизайнерский"];
@@ -71,6 +71,31 @@ const levels = ["Бюджетный", "Косметический", "Дизай�
 		<p data-portfolio-empty hidden class="mt-10 text-center text-muted">
 			По этому сочетанию фильтров пока нет проектов — уберите один из фильтров.
 		</p>
+
+		<div class="mt-14 flex justify-center">
+			<a
+				href={CONTACTS.vk}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group flex max-w-2xl flex-col items-center gap-5 rounded-lg border border-black/10 bg-surface px-8 py-8 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg sm:flex-row sm:text-left"
+			>
+				<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#0077FF] font-bold text-white shadow-md transition-transform duration-200 group-hover:scale-110">
+					VK
+				</span>
+				<div>
+					<p class="text-base text-graphite">
+						Это лишь часть наших работ. С полным портфолио с детальными фото, видео и описанием
+						этапов ремонта вы можете ознакомиться в нашей группе ВКонтакте.
+					</p>
+					<span class="btn btn-dark mt-4 bg-[#0077FF] group-hover:bg-[#0066dd]">
+						Смотреть в группе ВКонтакте
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="shrink-0 transition-transform duration-200 group-hover:translate-x-1">
+							<path d="M5 12h14M13 6l6 6-6 6" />
+						</svg>
+					</span>
+				</div>
+			</a>
+		</div>
 	</Section>
 </Layout>
 
