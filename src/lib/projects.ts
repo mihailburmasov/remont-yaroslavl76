@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
 		area: "110 м²",
 		term: "6 месяцев",
 		description:
-			"Ремонт дома-бани под ключ: от чернового бетона и разводки коммуникаций до готового объекта. В предбаннике — панорамное остекление и тёплый пол с керамогранитом, в парной — отделка термодревом, каменная стена и подсветка потолка. Отдельная зона с купелью и душем на глянцевой плитке.",
+			"Ремонт дома-бани под ключ: от чернового бетона и разводки коммуникаций до готового объекта. В предбаннике — панорамное остекление и тёплый пол с керамогранитом, в парной — отделка термодревом, каменная стена и подсветка потолка. Отдельная зона с купелью и душем на глянцевой плитке. В комплексе также зона отдыха с мини-кухней, летняя кухня с барбекю, два санузла и коридор с подсветкой.",
 		rooms: [
 			{
 				title: "Предбанник",
@@ -59,6 +59,14 @@ export const PROJECTS: Project[] = [
 				beforeSrc: "/images/portfolio/dom-banya-steklobloki-do.webp",
 				afterSrc: "/images/portfolio/dom-banya-steklobloki-posle.webp",
 			},
+		],
+		extraPhotos: [
+			{ title: "Гостиная", src: "/images/portfolio/dom-banya-gostinaya-posle.webp" },
+			{ title: "Летняя кухня", src: "/images/portfolio/dom-banya-letnyaya-kukhnya-1-posle.webp" },
+			{ title: "Летняя кухня", src: "/images/portfolio/dom-banya-letnyaya-kukhnya-2-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-banya-sanuzel-1-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-banya-sanuzel-2-posle.webp" },
+			{ title: "Коридор", src: "/images/portfolio/dom-banya-koridor-posle.webp" },
 		],
 	},
 	{
