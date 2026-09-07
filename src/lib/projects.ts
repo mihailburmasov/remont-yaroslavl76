@@ -22,6 +22,18 @@ export interface Project {
 	extraPhotos?: ProjectPhoto[];
 }
 
+export function getProjectCover(project: Project): { src: string; alt: string } {
+	const room = project.rooms[0];
+	if (room) {
+		return { src: room.afterSrc, alt: `${project.title} — ${room.title}, после ремонта` };
+	}
+	const photo = project.extraPhotos?.[0];
+	if (photo) {
+		return { src: photo.src, alt: `${project.title} — ${photo.title}, после ремонта` };
+	}
+	throw new Error(`Project "${project.slug}" has no photos`);
+}
+
 export const PROJECTS: Project[] = [
 	{
 		slug: "dom-banya",
@@ -73,6 +85,25 @@ export const PROJECTS: Project[] = [
 			{ title: "Прихожая", src: "/images/portfolio/dom-premium-prihozhaya-posle.webp" },
 			{ title: "Санузел", src: "/images/portfolio/dom-premium-sanuzel-posle.webp" },
 			{ title: "Санузел", src: "/images/portfolio/dom-premium-sanuzel2-posle.webp" },
+		],
+	},
+	{
+		slug: "bolshaya-oktyabrskaya",
+		title: "Двухкомнатная квартира на Большой Октябрьской",
+		objectType: "Квартира",
+		level: "Дизайнерский",
+		area: "54 м²",
+		term: "9 недель",
+		budgetRange: "1 100 000 – 1 450 000 ₽",
+		description:
+			"Ремонт двухкомнатной квартиры по адресу ул. Большая Октябрьская, 108: натяжные потолки с трековым светом, дизайнерские обои с акцентными стенами, керамогранит под мрамор в санузле. Фото «до» по этому объекту не сохранилось — только результат.",
+		rooms: [],
+		extraPhotos: [
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-posle.webp" },
+			{ title: "Спальня", src: "/images/portfolio/bolshaya-oktyabrskaya-spalnya-posle.webp" },
+			{ title: "Гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-gostinaya-1-posle.webp" },
+			{ title: "Гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-gostinaya-2-posle.webp" },
+			{ title: "Кухня-гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-kukhnya-gostinaya-posle.webp" },
 		],
 	},
 ];

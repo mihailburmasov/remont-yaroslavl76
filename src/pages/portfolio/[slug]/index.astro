@@ -4,7 +4,7 @@ import Section from "../../../components/ui/Section.astro";
 import Breadcrumbs from "../../../components/layout/Breadcrumbs.astro";
 import BeforeAfterSlider from "../../../components/BeforeAfterSlider.astro";
 import ContactForm from "../../../components/ContactForm.astro";
-import { PROJECTS } from "../../../lib/projects";
+import { PROJECTS, getProjectCover } from "../../../lib/projects";
 import { withBase } from "../../../lib/site";
 
 export function getStaticPaths() {
@@ -15,13 +15,14 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const cover = getProjectCover(project);
 
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "ImageObject",
 	name: project.title,
 	description: project.description,
-	contentUrl: new URL(withBase(project.rooms[0].afterSrc), Astro.site).toString(),
+	contentUrl: new URL(withBase(cover.src), Astro.site).toString(),
 };
 ---
 
@@ -33,7 +34,7 @@ const jsonLd = {
 
 	<section class="relative overflow-hidden bg-ink text-paper">
 		<img
-			src={withBase(project.rooms[0].afterSrc)}
+			src={withBase(cover.src)}
 			alt=""
 			width="1920"
 			height="1080"
@@ -74,21 +75,23 @@ const jsonLd = {
 			<p class="mt-4 text-sm text-muted">Бюджет проекта: {project.budgetRange}</p>
 		</div>
 
-		<div class="mt-12 grid gap-10 md:grid-cols-2">
-			{
-				project.rooms.map((room) => (
-					<div>
-						<BeforeAfterSlider
-							beforeSrc={room.beforeSrc}
-							afterSrc={room.afterSrc}
-							beforeAlt={`${room.title} — до ремонта`}
-							afterAlt={`${room.title} — после ремонта`}
-							label={room.title}
-						/>
-					</div>
-				))
-			}
-		</div>
+		{
+			project.rooms.length > 0 && (
+				<div class="mt-12 grid gap-10 md:grid-cols-2">
+					{project.rooms.map((room) => (
+						<div>
+							<BeforeAfterSlider
+								beforeSrc={room.beforeSrc}
+								afterSrc={room.afterSrc}
+								beforeAlt={`${room.title} — до ремонта`}
+								afterAlt={`${room.title} — после ремонта`}
+								label={room.title}
+							/>
+						</div>
+					))}
+				</div>
+			)
+		}
 
 		{
 			project.extraPhotos && project.extraPhotos.length > 0 && (

@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../lib/projects";
+import { getProjectCover } from "../lib/projects";
 import { withBase } from "../lib/site";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const cover = project.rooms[0];
+const cover = getProjectCover(project);
 ---
 
 <article
@@ -19,13 +20,13 @@ const cover = project.rooms[0];
 	<button
 		type="button"
 		data-lightbox-trigger
-		data-lightbox-src={withBase(cover.afterSrc)}
-		data-lightbox-caption={`${project.title} — ${cover.title}, после ремонта`}
+		data-lightbox-src={withBase(cover.src)}
+		data-lightbox-caption={cover.alt}
 		class="block w-full"
 	>
 		<img
-			src={withBase(cover.afterSrc)}
-			alt={`${project.title} — ${cover.title}, после ремонта`}
+			src={withBase(cover.src)}
+			alt={cover.alt}
 			width="1200"
 			height="900"
 			loading="lazy"
