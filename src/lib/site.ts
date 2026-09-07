@@ -249,7 +249,7 @@ export const TESTIMONIALS_PLACEHOLDER_COUNT = 3;
 export const STATS = [
 	{ value: "8", label: "лет на рынке" },
 	{ value: "70+", label: "сданных объектов" },
-	{ value: "12", label: "мастеров в штате" },
+	{ value: "16", label: "мастеров в штате" },
 	{ value: "2 года", label: "гарантия на работы" },
 ];
 
