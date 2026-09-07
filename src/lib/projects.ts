@@ -61,6 +61,11 @@ export const PROJECTS: Project[] = [
 				beforeSrc: "/images/portfolio/dom-premium-spalnya-do.webp",
 				afterSrc: "/images/portfolio/dom-premium-spalnya-posle.webp",
 			},
+			{
+				title: "Санузел",
+				beforeSrc: "/images/portfolio/dom-premium-sanuzel-do.webp",
+				afterSrc: "/images/portfolio/dom-premium-sanuzel-posle.webp",
+			},
 		],
 	},
 	{
