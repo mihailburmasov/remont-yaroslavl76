@@ -64,6 +64,7 @@ function initSlider(root: HTMLElement): void {
 	}
 
 	frame.addEventListener("pointerdown", (event) => {
+		if ((event.target as HTMLElement).closest("[data-baf-zoom]")) return;
 		startDragging(event);
 	});
 

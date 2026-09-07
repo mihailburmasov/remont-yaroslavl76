@@ -86,6 +86,7 @@ const jsonLd = {
 								beforeAlt={`${room.title} — до ремонта`}
 								afterAlt={`${room.title} — после ремонта`}
 								label={room.title}
+								galleryId={project.slug}
 							/>
 						</div>
 					))}
@@ -100,7 +101,14 @@ const jsonLd = {
 					<p class="mt-2 text-sm text-muted">Фото «до» по этим помещениям не сохранилось.</p>
 					<div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 						{project.extraPhotos.map((photo) => (
-							<div class="relative overflow-hidden rounded-lg bg-surface">
+							<button
+								type="button"
+								data-lightbox-trigger
+								data-lightbox-src={withBase(photo.src)}
+								data-lightbox-caption={`${photo.title} — после ремонта`}
+								data-lightbox-gallery={project.slug}
+								class="group relative block overflow-hidden rounded-lg bg-surface"
+							>
 								<img
 									src={withBase(photo.src)}
 									alt={`${photo.title} — после ремонта`}
@@ -108,7 +116,7 @@ const jsonLd = {
 									height={600}
 									loading="lazy"
 									decoding="async"
-									class="h-full w-full object-cover"
+									class="aspect-[4/3] w-full object-cover transition-transform duration-200 group-hover:scale-105"
 								/>
 								<span class="absolute top-3 left-3 rounded bg-ink/85 px-3 py-1 text-xs font-bold text-paper">
 									{photo.title}
@@ -116,7 +124,7 @@ const jsonLd = {
 								<span class="absolute top-3 right-3 rounded bg-brand-yellow px-2 py-1 text-xs font-bold text-ink">
 									После
 								</span>
-							</div>
+							</button>
 						))}
 					</div>
 				</div>
@@ -153,3 +161,5 @@ const jsonLd = {
 		</div>
 	</Section>
 </Layout>
+
+<script src="../../../scripts/lightbox.ts"></script>
