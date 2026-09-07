@@ -106,6 +106,29 @@ export const PROJECTS: Project[] = [
 			{ title: "Кухня-гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-kukhnya-gostinaya-posle.webp" },
 		],
 	},
+	{
+		slug: "prospekt-lenina",
+		title: "Проспект Ленина. Ремонт в старом жилом фонде",
+		objectType: "Квартира",
+		level: "Дизайнерский",
+		area: "72 м²",
+		term: "18 недель",
+		budgetRange: "2 300 000 – 2 900 000 ₽",
+		description:
+			"Ремонт квартиры в доме старого жилого фонда на проспекте Ленина: сохранили высокие потолки, добавили трековый свет и филёнчатые панели на стенах, кухню и гостиную объединили в единое пространство, оборудовали отдельный кабинет. Фото «до» по этому объекту не сохранилось — только результат.",
+		rooms: [],
+		extraPhotos: [
+			{ title: "Гостиная", src: "/images/portfolio/prospekt-lenina-gostinaya-1-posle.webp" },
+			{ title: "Гостиная", src: "/images/portfolio/prospekt-lenina-gostinaya-2-posle.webp" },
+			{ title: "Кухня", src: "/images/portfolio/prospekt-lenina-kukhnya-1-posle.webp" },
+			{ title: "Кухня", src: "/images/portfolio/prospekt-lenina-kukhnya-2-posle.webp" },
+			{ title: "Кухня", src: "/images/portfolio/prospekt-lenina-kukhnya-3-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/prospekt-lenina-sanuzel-1-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/prospekt-lenina-sanuzel-2-posle.webp" },
+			{ title: "Кабинет", src: "/images/portfolio/prospekt-lenina-kabinet-1-posle.webp" },
+			{ title: "Кабинет", src: "/images/portfolio/prospekt-lenina-kabinet-2-posle.webp" },
+		],
+	},
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
