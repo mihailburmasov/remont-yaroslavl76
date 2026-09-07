@@ -104,6 +104,12 @@ export const PROJECTS: Project[] = [
 		rooms: [],
 		extraPhotos: [
 			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-2-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-3-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-4-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-5-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-sanuzel-6-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/bolshaya-oktyabrskaya-tualet-posle.webp" },
 			{ title: "Спальня", src: "/images/portfolio/bolshaya-oktyabrskaya-spalnya-posle.webp" },
 			{ title: "Гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-gostinaya-1-posle.webp" },
 			{ title: "Гостиная", src: "/images/portfolio/bolshaya-oktyabrskaya-gostinaya-2-posle.webp" },
