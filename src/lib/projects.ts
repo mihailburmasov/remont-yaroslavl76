@@ -129,6 +129,29 @@ export const PROJECTS: Project[] = [
 			{ title: "Кабинет", src: "/images/portfolio/prospekt-lenina-kabinet-2-posle.webp" },
 		],
 	},
+	{
+		slug: "dom-sarafonovo",
+		title: "Частный дом в Сарафоново, ремонт под ключ",
+		objectType: "Дом",
+		level: "Косметический",
+		area: "116 м²",
+		term: "11 недель",
+		budgetRange: "1 200 000 – 1 550 000 ₽",
+		description:
+			"Ремонт дома под ключ в Сарафоново: кухня с мраморной столешницей и барной стойкой, гостиная-столовая, две спальни и два санузла. Фото «до» по этому объекту не сохранилось — только результат.",
+		rooms: [],
+		extraPhotos: [
+			{ title: "Кухня", src: "/images/portfolio/dom-sarafonovo-kukhnya-1-posle.webp" },
+			{ title: "Кухня", src: "/images/portfolio/dom-sarafonovo-kukhnya-2-posle.webp" },
+			{ title: "Прихожая", src: "/images/portfolio/dom-sarafonovo-prihozhaya-posle.webp" },
+			{ title: "Гостиная", src: "/images/portfolio/dom-sarafonovo-gostinaya-1-posle.webp" },
+			{ title: "Гостиная", src: "/images/portfolio/dom-sarafonovo-gostinaya-2-posle.webp" },
+			{ title: "Спальня", src: "/images/portfolio/dom-sarafonovo-spalnya-1-posle.webp" },
+			{ title: "Спальня", src: "/images/portfolio/dom-sarafonovo-spalnya-2-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-sarafonovo-sanuzel-1-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-sarafonovo-sanuzel-2-posle.webp" },
+		],
+	},
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
