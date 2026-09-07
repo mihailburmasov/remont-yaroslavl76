@@ -75,29 +75,6 @@ export const PROJECTS: Project[] = [
 			{ title: "Санузел", src: "/images/portfolio/dom-premium-sanuzel2-posle.webp" },
 		],
 	},
-	{
-		slug: "dom-sarafonovo",
-		title: "Частный дом в Сарафоново, ремонт под ключ",
-		objectType: "Дом",
-		level: "Косметический",
-		area: "116 м²",
-		term: "10 недель",
-		budgetRange: "1 050 000 – 1 350 000 ₽",
-		description:
-			"Ремонт дома под ключ от чернового бетона до готового интерьера с мебелью. Натяжные потолки, тёплый пол, кухня-гостиная со столешницей под мрамор, спальня с текстилем и техникой — заезжай и живи.",
-		rooms: [
-			{
-				title: "Кухня-гостиная",
-				beforeSrc: "/images/portfolio/dom-sarafonovo-kukhnya-do.webp",
-				afterSrc: "/images/portfolio/dom-sarafonovo-kukhnya-posle.webp",
-			},
-			{
-				title: "Спальня",
-				beforeSrc: "/images/portfolio/dom-sarafonovo-spalnya-do.webp",
-				afterSrc: "/images/portfolio/dom-sarafonovo-spalnya-posle.webp",
-			},
-		],
-	},
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {

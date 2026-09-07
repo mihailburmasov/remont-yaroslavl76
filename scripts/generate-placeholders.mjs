@@ -63,8 +63,6 @@ const portfolioPairs = [
 	{ slug: "dom-banya-predbannik", title: "Предбанник, дизайнерский ремонт" },
 	{ slug: "dom-banya-parilka", title: "Парная, дизайнерский ремонт" },
 	{ slug: "dom-premium-gostinaya", title: "Гостиная, дизайнерский ремонт" },
-	{ slug: "dom-sarafonovo-kukhnya", title: "Кухня-гостиная, косметический ремонт" },
-	{ slug: "dom-sarafonovo-spalnya", title: "Спальня, косметический ремонт" },
 ];
 
 for (const pair of portfolioPairs) {
