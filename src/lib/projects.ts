@@ -44,6 +44,11 @@ export const PROJECTS: Project[] = [
 				beforeSrc: "/images/portfolio/dom-banya-parilka-do.webp",
 				afterSrc: "/images/portfolio/dom-banya-parilka-posle.webp",
 			},
+			{
+				title: "Стеклоблочная перегородка",
+				beforeSrc: "/images/portfolio/dom-banya-steklobloki-do.webp",
+				afterSrc: "/images/portfolio/dom-banya-steklobloki-posle.webp",
+			},
 		],
 	},
 	{
