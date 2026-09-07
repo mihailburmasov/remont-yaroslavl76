@@ -89,6 +89,36 @@ const jsonLd = {
 				))
 			}
 		</div>
+
+		{
+			project.extraPhotos && project.extraPhotos.length > 0 && (
+				<div class="mt-14">
+					<h2>Ещё фото объекта</h2>
+					<p class="mt-2 text-sm text-muted">Фото «до» по этим помещениям не сохранилось.</p>
+					<div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						{project.extraPhotos.map((photo) => (
+							<div class="relative overflow-hidden rounded-lg bg-surface">
+								<img
+									src={withBase(photo.src)}
+									alt={`${photo.title} — после ремонта`}
+									width={800}
+									height={600}
+									loading="lazy"
+									decoding="async"
+									class="h-full w-full object-cover"
+								/>
+								<span class="absolute top-3 left-3 rounded bg-ink/85 px-3 py-1 text-xs font-bold text-paper">
+									{photo.title}
+								</span>
+								<span class="absolute top-3 right-3 rounded bg-brand-yellow px-2 py-1 text-xs font-bold text-ink">
+									После
+								</span>
+							</div>
+						))}
+					</div>
+				</div>
+			)
+		}
 	</Section>
 
 	<Section tone="surface">

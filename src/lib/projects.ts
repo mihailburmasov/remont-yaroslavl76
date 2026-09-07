@@ -4,6 +4,11 @@ export interface ProjectRoom {
 	afterSrc: string;
 }
 
+export interface ProjectPhoto {
+	title: string;
+	src: string;
+}
+
 export interface Project {
 	slug: string;
 	title: string;
@@ -14,6 +19,7 @@ export interface Project {
 	budgetRange: string;
 	description: string;
 	rooms: ProjectRoom[];
+	extraPhotos?: ProjectPhoto[];
 }
 
 export const PROJECTS: Project[] = [
@@ -56,6 +62,12 @@ export const PROJECTS: Project[] = [
 				beforeSrc: "/images/portfolio/dom-premium-gostinaya-do.webp",
 				afterSrc: "/images/portfolio/dom-premium-gostinaya-posle.webp",
 			},
+		],
+		extraPhotos: [
+			{ title: "Кухня", src: "/images/portfolio/dom-premium-kukhnya-posle.webp" },
+			{ title: "Прихожая", src: "/images/portfolio/dom-premium-prihozhaya-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-premium-sanuzel-posle.webp" },
+			{ title: "Санузел", src: "/images/portfolio/dom-premium-sanuzel2-posle.webp" },
 		],
 	},
 	{
