@@ -12,9 +12,11 @@
 
 | Что | Ссылка |
 |---|---|
-| Живой сайт | https://mihailburmasov.github.io/remont-yaroslavl76/ |
+| Живой сайт (боевой хостинг, временный адрес до домена) | http://pro-remont76-static.website.yandexcloud.net |
+| Превью на GitHub Pages | https://mihailburmasov.github.io/remont-yaroslavl76/ |
 | Репозиторий | https://github.com/mihailburmasov/remont-yaroslavl76 |
-| Автодеплой | GitHub Actions пересобирает и публикует сайт при каждом `push` в `master` |
+| Автодеплой на GitHub Pages | GitHub Actions пересобирает и публикует превью при каждом `push` в `master` |
+| Деплой на Yandex Cloud | вручную командой `npm run deploy:yandex` (см. `README.md`) |
 | Локальный запуск | `npm install && npm run dev` → http://localhost:4321 |
 
 ## Сделано
