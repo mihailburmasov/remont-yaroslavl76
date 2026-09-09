@@ -67,6 +67,15 @@
       - `_acme-challenge` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
       - `_acme-challenge.www` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
 - [x] Сертификат подтверждён, статус «Issued» (оба домена — Valid)
+- [x] Создан CDN-ресурс `bc8r7xvx7umghpdu2j4c` через `yc cdn resource create`
+      (источник — `pro-remont76-static.website.yandexcloud.net` по HTTP, сертификат
+      `fpq13tv9qjjfa6dngdah`, редирект HTTP→HTTPS включён, домены `proremont76.ru` +
+      `www.proremont76.ru`). Провайдерский CNAME для DNS: `4a0bf2c9e1d604d9.topology.gslb.yccdn.ru.`
+- [ ] В зоне reg.ru прописать CNAME: `www` → провайдерский CNAME выше; для корня — CNAME
+      на `@`, либо (если reg.ru не разрешает CNAME на корень) 301-редирект
+      `proremont76.ru → https://www.proremont76.ru` через «Переадресацию домена»
+- [ ] Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт
+      с валидным сертификатом
 - [ ] Создать ресурс **CDN** в Yandex Cloud (источник — бакет `pro-remont76-static`), привязать
       сертификат, добавить домены `proremont76.ru` и `www.proremont76.ru`
 - [ ] В зоне reg.ru прописать `www` → CNAME на адрес CDN-ресурса; для корневого домена — либо
