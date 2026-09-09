@@ -12,7 +12,8 @@
 
 | Что | Ссылка |
 |---|---|
-| Живой сайт (боевой хостинг, временный адрес до домена) | http://pro-remont76-static.website.yandexcloud.net |
+| Живой сайт (боевой хостинг, временный адрес до подключения домена) | http://pro-remont76-static.website.yandexcloud.net |
+| Боевой домен | proremont76.ru — прописан в коде, HTTPS через Yandex Cloud CDN подключается по инструкции в `README.md` |
 | Превью на GitHub Pages | https://mihailburmasov.github.io/remont-yaroslavl76/ |
 | Репозиторий | https://github.com/mihailburmasov/remont-yaroslavl76 |
 | Автодеплой на GitHub Pages | GitHub Actions пересобирает и публикует превью при каждом `push` в `master` |
@@ -46,7 +47,7 @@
 - [ ] **Подтвердить письмо FormSubmit.co** — при первой реальной заявке с сайта на почту
       Dima.yar.1992@mail.ru придёт письмо-подтверждение, без этого шага заявки не будут доходить
 - [ ] Подключить счётчик Яндекс.Метрики — `{{METRIKA_ID}}` в `src/lib/site.ts`
-- [ ] Заменить домен-плейсхолдер `pro-remont76.ru` на реальный после покупки хостинга (3 места, см. `README.md`)
+- [ ] Подключить домен `proremont76.ru` через Yandex Cloud CDN + HTTPS-сертификат (домен уже прописан в коде, шаги — в `README.md`)
 - [ ] Заменить стоковые фото портфолио (`/до/после`) на фото настоящих объектов клиента
 - [ ] Проверить/уточнить Telegram-ссылку — собрана автоматически из номера телефона, не подтверждена
 - [ ] Отозвать GitHub-токен, выпущенный для настройки автодеплоя (Settings → Developer settings → Personal access tokens)

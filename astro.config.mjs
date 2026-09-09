@@ -10,10 +10,8 @@ import sitemap from '@astrojs/sitemap';
 const isGhPagesBuild = process.env.DEPLOY_TARGET === 'gh-pages';
 
 // https://astro.build/config
-// ВАЖНО: site — плейсхолдер-домен. Заменить на реальный после покупки хостинга/домена
-// (см. CONTENT-TODO.md, {{DOMAIN}}) — от него зависят sitemap.xml, canonical и OG-ссылки.
 export default defineConfig({
-  site: isGhPagesBuild ? 'https://mihailburmasov.github.io' : 'https://pro-remont76.ru',
+  site: isGhPagesBuild ? 'https://mihailburmasov.github.io' : 'https://proremont76.ru',
   base: isGhPagesBuild ? '/remont-yaroslavl76' : '/',
   integrations: [
     sitemap({

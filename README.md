@@ -29,27 +29,39 @@ npm run preview
 
 Сайт размещён в Yandex Object Storage (бакет `pro-remont76-static`, статический хостинг):
 
-- **Живой адрес (временный, до подключения домена):** http://pro-remont76-static.website.yandexcloud.net
+- **Временный адрес бакета:** http://pro-remont76-static.website.yandexcloud.net
+- **Боевой домен:** `proremont76.ru` — подключается через Yandex Cloud CDN (см. ниже), чтобы
+  сайт отдавался по HTTPS.
 - **Повторный деплой:** `npm run deploy:yandex` — собирает проект и синхронизирует `dist/` с
   бакетом (требует настроенный профиль AWS CLI `yandex`, см. `~/.aws/config`).
-- После покупки и подключения домена: привязать домен к бакету (CNAME на
-  `pro-remont76-static.website.yandexcloud.net` либо через Yandex Cloud CDN), затем заменить
-  плейсхолдер `pro-remont76.ru` на реальный домен (см. пункт 2 ниже) и передеплоить.
+
+### Подключение домена proremont76.ru через Yandex Cloud CDN + HTTPS
+
+1. В консоли Yandex Cloud → **Certificate Manager** — заказать бесплатный сертификат
+   (Let's Encrypt) на `proremont76.ru` и `www.proremont76.ru`. Подтвердить владение доменом
+   (DNS-запись TXT/CNAME, которую покажет консоль, — добавить у регистратора домена).
+2. В консоли → **CDN** — создать ресурс: источник — бакет `pro-remont76-static`
+   (публичный статический сайт), включить HTTPS с сертификатом из шага 1, домены —
+   `proremont76.ru` и `www.proremont76.ru`.
+3. У регистратора домена — прописать DNS-записи на выданный CDN-ресурсом адрес
+   (обычно CNAME на `*.cdn.yandex.net`; для корневого домена без поддомена — ANAME/ALIAS,
+   если регистратор поддерживает, либо через Yandex Cloud DNS-зону).
+4. Проверить, что `https://proremont76.ru` открывает сайт с валидным сертификатом (может
+   занять до часа на распространение DNS/выпуск сертификата).
+5. Домен уже прописан в коде (`astro.config.mjs`, `src/lib/site.ts`, `public/robots.txt`) —
+   после подключения CDN просто `npm run deploy:yandex`, дополнительных правок не требуется.
 
 Проект — набор статических файлов без бэкенда, подходит и для любого другого статического
 хостинга (Netlify, Vercel, обычный FTP/SSH-хостинг — залить содержимое `dist/` после
 `npm run build`).
 
-Перед первым деплоем:
+Осталось из плейсхолдеров (см. `CONTENT-TODO.md`):
 
-1. Заполнить оставшиеся плейсхолдеры из `CONTENT-TODO.md` — юрреквизиты (`{{LEGAL_NAME}}`,
-   `{{INN}}`), приёмник формы (`{{FORM_ENDPOINT}}` в `src/lib/submitLead.ts`), счётчик Метрики
-   (`{{METRIKA_ID}}`). Телефон, адрес, цены и фото уже подставлены (демо-версия для утверждения
-   визуала).
-2. Заменить домен-плейсхолдер `pro-remont76.ru` на реальный — он используется в
-   `astro.config.mjs` (`site`), `src/lib/site.ts` (`SITE.url`) и `public/robots.txt`.
-3. Заменить стоковые фото портфолио и команды в `public/images/portfolio/` и `public/images/team/`
-   на настоящие, когда они будут готовы (см. раздел «Фото» в `CONTENT-TODO.md`).
+1. Юрреквизиты (`{{LEGAL_NAME}}`, `{{INN}}`), приёмник формы (`{{FORM_ENDPOINT}}` в
+   `src/lib/submitLead.ts`), счётчик Метрики (`{{METRIKA_ID}}`).
+2. Заменить стоковые фото портфолио и команды в `public/images/portfolio/` и
+   `public/images/team/` на настоящие, когда они будут готовы (см. раздел «Фото» в
+   `CONTENT-TODO.md`).
 
 ## Структура проекта
 

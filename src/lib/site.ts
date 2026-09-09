@@ -20,9 +20,8 @@ export const SITE = {
 	region: "Ярославская область",
 	description:
 		"Ремонт квартир и частных домов «под ключ» в Ярославле и области — по собственному дизайн-проекту, в любом бюджете.",
-	// Плейсхолдер-домен — совпадает с `site` в astro.config.mjs. Заменить на реальный домен
-	// везде разом (поиск/замена "pro-remont76.ru") после покупки хостинга — см. CONTENT-TODO.md.
-	url: "https://pro-remont76.ru",
+	// Совпадает с `site` в astro.config.mjs.
+	url: "https://proremont76.ru",
 };
 
 export const METRIKA_ID = "{{METRIKA_ID}}";
