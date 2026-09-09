@@ -66,8 +66,7 @@
 - [x] В зону DNS на reg.ru добавлены две CNAME-записи для подтверждения владения доменом:
       - `_acme-challenge` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
       - `_acme-challenge.www` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
-- [ ] Ждём смены статуса сертификата с «Validating» на «Done»/«Issued» (обычно 15–60 минут,
-      но после смены NS-серверов может занять дольше)
+- [x] Сертификат подтверждён, статус «Issued» (оба домена — Valid)
 - [ ] Создать ресурс **CDN** в Yandex Cloud (источник — бакет `pro-remont76-static`), привязать
       сертификат, добавить домены `proremont76.ru` и `www.proremont76.ru`
 - [ ] В зоне reg.ru прописать `www` → CNAME на адрес CDN-ресурса; для корневого домена — либо
