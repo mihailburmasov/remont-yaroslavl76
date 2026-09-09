@@ -55,32 +55,32 @@
 
 ## Статус подключения домена (2026-09-09)
 
-Домен `proremont76.ru` куплен на reg.ru. Ход подключения к Yandex Cloud CDN + HTTPS
-(инструкция — в `README.md`, раздел «Подключение домена»):
+Домен `proremont76.ru` куплен на reg.ru (регистратор). Финальная схема: DNS-зона делегирована
+в Yandex Cloud DNS (reg.ru не поддерживает CNAME/ALIAS на корень домена — Yandex Cloud DNS
+поддерживает тип ANAME, которым решается именно эта задача). Тот же паттерн, что и у
+sitomika.ru.
 
-- [x] DNS-серверы домена на reg.ru переключены с хостинговых (`ns1/ns2.hosting.reg.ru`) на
-      обычные бесплатные (`ns1.reg.ru`, `ns2.reg.ru`) — записи теперь редактируются прямо в
-      личном кабинете reg.ru («Домены» → `proremont76.ru` → «DNS-серверы и управление зоной»)
-- [x] В Yandex Cloud → Certificate Manager создан сертификат `proremont76-ru`
-      (Let's Encrypt, Managed) на домены `proremont76.ru` и `www.proremont76.ru`
-- [x] В зону DNS на reg.ru добавлены две CNAME-записи для подтверждения владения доменом:
-      - `_acme-challenge` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
-      - `_acme-challenge.www` → `fpq13tv9qjjfa6dngdah.cm.yandexcloud.net.`
-- [x] Сертификат подтверждён, статус «Issued» (оба домена — Valid)
-- [x] Создан CDN-ресурс `bc8r7xvx7umghpdu2j4c` через `yc cdn resource create`
-      (источник — `pro-remont76-static.website.yandexcloud.net` по HTTP, сертификат
-      `fpq13tv9qjjfa6dngdah`, редирект HTTP→HTTPS включён, домены `proremont76.ru` +
-      `www.proremont76.ru`). Провайдерский CNAME для DNS: `4a0bf2c9e1d604d9.topology.gslb.yccdn.ru.`
-- [ ] В зоне reg.ru прописать CNAME: `www` → провайдерский CNAME выше; для корня — CNAME
-      на `@`, либо (если reg.ru не разрешает CNAME на корень) 301-редирект
-      `proremont76.ru → https://www.proremont76.ru` через «Переадресацию домена»
-- [ ] Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт
-      с валидным сертификатом
-- [ ] Создать ресурс **CDN** в Yandex Cloud (источник — бакет `pro-remont76-static`), привязать
-      сертификат, добавить домены `proremont76.ru` и `www.proremont76.ru`
-- [ ] В зоне reg.ru прописать `www` → CNAME на адрес CDN-ресурса; для корневого домена — либо
-      301-редирект через «Переадресацию домена» на `https://www.proremont76.ru`, либо A-запись,
-      если консоль CDN выдаст отдельный адрес для корня (см. README.md)
+Готово:
+
+- [x] Сертификат Let's Encrypt `proremont76-ru` в Certificate Manager, статус «Issued»,
+      домены `proremont76.ru` + `www.proremont76.ru` (id `fpq13tv9qjjfa6dngdah`)
+- [x] CDN-ресурс `bc8r7xvx7umghpdu2j4c` (`yc cdn resource create`) — источник
+      `pro-remont76-static.website.yandexcloud.net` по HTTP, привязан сертификат выше,
+      редирект HTTP→HTTPS включён. Провайдерский CNAME: `4a0bf2c9e1d604d9.topology.gslb.yccdn.ru.`
+- [x] Публичная DNS-зона `proremont76-ru-zone` в Yandex Cloud DNS (id `dnsdmegdnkmmutp8alkn`),
+      NS-серверы `ns1.yandexcloud.net` / `ns2.yandexcloud.net`, записи:
+      - `proremont76.ru.` → ANAME → CNAME CDN-ресурса выше
+      - `www.proremont76.ru.` → CNAME → CNAME CDN-ресурса выше
+      - `_acme-challenge.proremont76.ru.` и `_acme-challenge.www.proremont76.ru.` → CNAME на
+        Certificate Manager (нужны для автопродления сертификата каждые ~90 дней)
+- [x] На reg.ru NS-серверы домена переключены на `ns1.yandexcloud.net` / `ns2.yandexcloud.net`
+      («Домены» → `proremont76.ru` → «DNS-серверы и управление зоной» → «Изменить» → «Свой
+      список DNS-серверов»)
+
+Осталось:
+
+- [ ] Дождаться распространения смены NS (до суток) — на 2026-09-09 ещё отдавались старые
+      `ns1.reg.ru`/`ns2.reg.ru`
 - [ ] Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт с
       валидным сертификатом
 

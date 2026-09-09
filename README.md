@@ -37,28 +37,30 @@ npm run preview
 
 ### Подключение домена proremont76.ru через Yandex Cloud CDN + HTTPS
 
-Домен куплен на reg.ru — DNS-записи добавляются в личном кабинете reg.ru
-(«Мои домены» → `proremont76.ru` → «Управление DNS» / «DNS-серверы и зона»), DNS остаётся
-на reg.ru, в Yandex Cloud DNS-зону переносить не нужно.
+Домен зарегистрирован на reg.ru, но управление DNS-записями делегировано в **Yandex Cloud
+DNS** (публичная зона `proremont76-ru-zone`) — reg.ru не поддерживает CNAME/ALIAS на корень
+домена, а Yandex Cloud DNS поддерживает тип **ANAME**, который решает именно эту задачу
+(корень домена не может напрямую указывать на CDN через обычный CNAME). Тот же подход
+использован для sitomika.ru.
 
-1. В консоли Yandex Cloud → **Certificate Manager** — заказать бесплатный сертификат
-   (Let's Encrypt) на `proremont76.ru` и `www.proremont76.ru`. Консоль покажет
-   DNS-записи для подтверждения владения доменом (обычно CNAME вида
-   `_acme-challenge.proremont76.ru`) — добавить их в зоне на reg.ru.
-2. В консоли → **CDN** — создать ресурс: источник — бакет `pro-remont76-static`
-   (публичный статический сайт), включить HTTPS с сертификатом из шага 1, домены —
-   `proremont76.ru` и `www.proremont76.ru`. Консоль покажет точный адрес для CNAME
-   (вида `<id>.cdn.yandex.net`).
-3. В зоне reg.ru:
-   - `www` → **CNAME** → адрес CDN-ресурса из шага 2.
-   - Корневой домен (`@` / `proremont76.ru`) — CNAME на корень DNS не разрешает, поэтому
-     самый простой вариант на reg.ru: включить в разделе «Переадресация домена» 301-редирект
-     с `proremont76.ru` на `https://www.proremont76.ru`. Если в консоли Yandex Cloud CDN для
-     корневого домена показан отдельный A-адрес — прописать его A-записью на `@` вместо
-     редиректа (следовать тому, что покажет консоль).
-4. Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт с
-   валидным сертификатом (может занять до часа на распространение DNS/выпуск сертификата).
-5. Домен уже прописан в коде (`astro.config.mjs`, `src/lib/site.ts`, `public/robots.txt`) —
+1. **Certificate Manager** — заказать управляемый сертификат Let's Encrypt на `proremont76.ru`
+   и `www.proremont76.ru`, подтвердить владение доменом через CNAME-записи
+   `_acme-challenge.*` (нужны для первичного выпуска и для автопродления каждые ~90 дней).
+2. **CDN** — создать ресурс (`yc cdn resource create`): источник — bucket website-эндпоинт
+   `pro-remont76-static.website.yandexcloud.net` по HTTP с явным `--host-header`, привязать
+   сертификат из шага 1, домены `proremont76.ru` + `www.proremont76.ru`. CDN выдаёт
+   провайдерский CNAME вида `<id>.topology.gslb.yccdn.ru`.
+3. **Yandex Cloud DNS** — публичная зона на домен, записи:
+   - `proremont76.ru.` → **ANAME** → провайдерский CNAME CDN-ресурса
+   - `www.proremont76.ru.` → **CNAME** → тот же адрес
+   - `_acme-challenge.proremont76.ru.` и `_acme-challenge.www.proremont76.ru.` → CNAME на
+     Certificate Manager (из шага 1) — сохранить, иначе через ~90 дней не продлится сертификат
+4. **reg.ru** — сменить NS-серверы домена на выданные зоной (`ns1.yandexcloud.net`,
+   `ns2.yandexcloud.net»): «Домены» → `proremont76.ru` → «DNS-серверы и управление зоной» →
+   «Изменить» → «Свой список DNS-серверов». Распространяется до суток.
+5. Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт с
+   валидным сертификатом.
+6. Домен уже прописан в коде (`astro.config.mjs`, `src/lib/site.ts`, `public/robots.txt`) —
    после подключения CDN просто `npm run deploy:yandex`, дополнительных правок не требуется.
 
 Проект — набор статических файлов без бэкенда, подходит и для любого другого статического
