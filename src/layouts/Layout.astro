@@ -5,6 +5,7 @@ import Footer from "../components/layout/Footer.astro";
 import FloatingMessengers from "../components/layout/FloatingMessengers.astro";
 import Metrika from "../components/Metrika.astro";
 import { SITE, withBase } from "../lib/site";
+import { OG_IMAGE_VERSION } from "../lib/og-image";
 
 interface Props {
 	title: string;
@@ -14,7 +15,7 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.url);
-const ogImage = new URL(withBase("/og-cover.jpg"), Astro.site ?? SITE.url);
+const ogImage = new URL(withBase(`/og-cover.jpg?v=${OG_IMAGE_VERSION}`), Astro.site ?? SITE.url);
 ---
 
 <!doctype html>
@@ -64,6 +65,9 @@ const ogImage = new URL(withBase("/og-cover.jpg"), Astro.site ?? SITE.url);
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="1200" />
+		<meta property="og:image:type" content="image/jpeg" />
 		<meta property="og:locale" content="ru_RU" />
 
 		<meta name="twitter:card" content="summary_large_image" />
