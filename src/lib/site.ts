@@ -24,7 +24,7 @@ export const SITE = {
 	url: "https://proremont76.ru",
 };
 
-export const METRIKA_ID = "{{METRIKA_ID}}";
+export const METRIKA_ID = "112446514";
 
 export const CONTACTS = {
 	phone: "+7 (909) 280-00-55",
