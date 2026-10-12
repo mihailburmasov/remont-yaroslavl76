@@ -12,12 +12,11 @@
 
 | Что | Ссылка |
 |---|---|
-| Живой сайт (боевой хостинг, временный адрес до подключения домена) | http://pro-remont76-static.website.yandexcloud.net |
-| Боевой домен | proremont76.ru — прописан в коде, HTTPS через Yandex Cloud CDN подключается по инструкции в `README.md` |
+| Живой сайт | https://proremont76.ru (хостинг Beget, с 2026-10-12) |
 | Превью на GitHub Pages | https://mihailburmasov.github.io/remont-yaroslavl76/ |
 | Репозиторий | https://github.com/mihailburmasov/remont-yaroslavl76 |
 | Автодеплой на GitHub Pages | GitHub Actions пересобирает и публикует превью при каждом `push` в `master` |
-| Деплой на Yandex Cloud | вручную командой `npm run deploy:yandex` (см. `README.md`) |
+| Деплой на Beget | вручную: `BEGET_FTP_PASS=... npm run deploy:beget` (см. `README.md`) |
 | Локальный запуск | `npm install && npm run dev` → http://localhost:4321 |
 
 ## Сделано
@@ -47,42 +46,28 @@
 - [ ] **Подтвердить письмо FormSubmit.co** — при первой реальной заявке с сайта на почту
       Dima.yar.1992@mail.ru придёт письмо-подтверждение, без этого шага заявки не будут доходить
 - [ ] Подключить счётчик Яндекс.Метрики — `{{METRIKA_ID}}` в `src/lib/site.ts`
-- [ ] Подключить домен `proremont76.ru` через Yandex Cloud CDN + HTTPS-сертификат — **в процессе**,
-      см. «Статус подключения домена» ниже
+- [ ] Завершить переезд на Beget — см. «Хостинг и домен» ниже
 - [ ] Заменить стоковые фото портфолио (`/до/после`) на фото настоящих объектов клиента
 - [ ] Проверить/уточнить Telegram-ссылку — собрана автоматически из номера телефона, не подтверждена
 - [ ] Отозвать GitHub-токен, выпущенный для настройки автодеплоя (Settings → Developer settings → Personal access tokens)
 
-## Статус подключения домена (2026-09-09)
+## Хостинг и домен (2026-10-12)
 
-Домен `proremont76.ru` куплен на reg.ru (регистратор). Финальная схема: DNS-зона делегирована
-в Yandex Cloud DNS (reg.ru не поддерживает CNAME/ALIAS на корень домена — Yandex Cloud DNS
-поддерживает тип ANAME, которым решается именно эта задача). Тот же паттерн, что и у
-sitomika.ru.
+Сайт полностью перенесён из Yandex Cloud на Beget, возвращаться в Yandex Cloud не планируется.
 
-Готово:
-
-- [x] Сертификат Let's Encrypt `proremont76-ru` в Certificate Manager, статус «Issued»,
-      домены `proremont76.ru` + `www.proremont76.ru` (id `fpq13tv9qjjfa6dngdah`)
-- [x] CDN-ресурс `bc8r7xvx7umghpdu2j4c` (`yc cdn resource create`) — источник
-      `pro-remont76-static.website.yandexcloud.net` по HTTP, привязан сертификат выше,
-      редирект HTTP→HTTPS включён. Провайдерский CNAME: `4a0bf2c9e1d604d9.topology.gslb.yccdn.ru.`
-- [x] Публичная DNS-зона `proremont76-ru-zone` в Yandex Cloud DNS (id `dnsdmegdnkmmutp8alkn`),
-      NS-серверы `ns1.yandexcloud.net` / `ns2.yandexcloud.net`, записи:
-      - `proremont76.ru.` → ANAME → CNAME CDN-ресурса выше
-      - `www.proremont76.ru.` → CNAME → CNAME CDN-ресурса выше
-      - `_acme-challenge.proremont76.ru.` и `_acme-challenge.www.proremont76.ru.` → CNAME на
-        Certificate Manager (нужны для автопродления сертификата каждые ~90 дней)
-- [x] На reg.ru NS-серверы домена переключены на `ns1.yandexcloud.net` / `ns2.yandexcloud.net`
-      («Домены» → `proremont76.ru` → «DNS-серверы и управление зоной» → «Изменить» → «Свой
-      список DNS-серверов»)
+- Beget: аккаунт `mihainpx`, сайт `proremont76.ru` (id 9438224), папка
+  `proremont76.ru/public_html`, домен добавлен и привязан к сайту (id 14771395).
+- HTTPS — Let's Encrypt от Beget (заказан в панели, продлевается автоматически).
+- Домен зарегистрирован на reg.ru.
 
 Осталось:
 
-- [ ] Дождаться распространения смены NS (до суток) — на 2026-09-09 ещё отдавались старые
-      `ns1.reg.ru`/`ns2.reg.ru`
-- [ ] Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт с
-      валидным сертификатом
+- [ ] Сменить на reg.ru NS-серверы домена с `ns1/ns2.yandexcloud.net` на `ns1.beget.com`,
+      `ns2.beget.com`, `ns1.beget.pro`, `ns2.beget.pro` (пока домен смотрит на Beget A-записями
+      из зоны Yandex Cloud DNS)
+- [ ] После того как NS разойдутся (`whois proremont76.ru | grep nserver` и
+      `nslookup -type=NS proremont76.ru 8.8.8.8` показывают Beget) — удалить зону
+      `proremont76-ru-zone` (id `dnsdmegdnkmmutp8alkn`) в Yandex Cloud DNS
 
 ## Документы в репозитории
 
@@ -95,4 +80,4 @@ sitomika.ru.
 
 ## Стек
 
-Astro (static) · Tailwind CSS v4 · TypeScript · @astrojs/sitemap · GitHub Actions · GitHub Pages · без CMS
+Astro (static) · Tailwind CSS v4 · TypeScript · @astrojs/sitemap · GitHub Actions · GitHub Pages · хостинг Beget · без CMS

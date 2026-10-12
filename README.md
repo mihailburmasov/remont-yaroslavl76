@@ -27,45 +27,29 @@ npm run preview
 
 ## Деплой
 
-Сайт размещён в Yandex Object Storage (бакет `pro-remont76-static`, статический хостинг):
+С 2026-10-12 сайт размещён на хостинге **Beget** (аккаунт `mihainpx`, сайт `proremont76.ru`,
+папка на сервере `proremont76.ru/public_html`). До этого он жил в Yandex Cloud (Object
+Storage + CDN + Cloud DNS); оттуда сайт перенесён полностью, возвращаться туда не планируется.
 
-- **Временный адрес бакета:** http://pro-remont76-static.website.yandexcloud.net
-- **Боевой домен:** `proremont76.ru` — подключается через Yandex Cloud CDN (см. ниже), чтобы
-  сайт отдавался по HTTPS.
-- **Повторный деплой:** `npm run deploy:yandex` — собирает проект и синхронизирует `dist/` с
-  бакетом (требует настроенный профиль AWS CLI `yandex`, см. `~/.aws/config`).
+- **Повторный деплой:** `BEGET_FTP_PASS=<пароль от панели Beget> npm run deploy:beget` —
+  собирает проект и заливает `dist/` по FTP (`mihainpx.beget.tech`) скриптом
+  `scripts/deploy-beget.sh`. Файлы на сервере перезаписываются, лишние не удаляются: если
+  страницу или картинку убрали из проекта, старый файл на сервере удалить вручную (файловый
+  менеджер панели или FTP).
+- **`.htaccess`** лежит в `public/` и попадает в сборку: индекс `index.html`, своя страница
+  404, редиректы `http → https` и `www → proremont76.ru`.
+- **HTTPS:** бесплатный сертификат Let's Encrypt, выпускается и продлевается Beget
+  (панель → «Сайты» / «SSL-сертификаты»).
 
-### Подключение домена proremont76.ru через Yandex Cloud CDN + HTTPS
+### Домен proremont76.ru
 
-Домен зарегистрирован на reg.ru, но управление DNS-записями делегировано в **Yandex Cloud
-DNS** (публичная зона `proremont76-ru-zone`) — reg.ru не поддерживает CNAME/ALIAS на корень
-домена, а Yandex Cloud DNS поддерживает тип **ANAME**, который решает именно эту задачу
-(корень домена не может напрямую указывать на CDN через обычный CNAME). Тот же подход
-использован для sitomika.ru.
-
-1. **Certificate Manager** — заказать управляемый сертификат Let's Encrypt на `proremont76.ru`
-   и `www.proremont76.ru`, подтвердить владение доменом через CNAME-записи
-   `_acme-challenge.*` (нужны для первичного выпуска и для автопродления каждые ~90 дней).
-2. **CDN** — создать ресурс (`yc cdn resource create`): источник — bucket website-эндпоинт
-   `pro-remont76-static.website.yandexcloud.net` по HTTP с явным `--host-header`, привязать
-   сертификат из шага 1, домены `proremont76.ru` + `www.proremont76.ru`. CDN выдаёт
-   провайдерский CNAME вида `<id>.topology.gslb.yccdn.ru`.
-3. **Yandex Cloud DNS** — публичная зона на домен, записи:
-   - `proremont76.ru.` → **ANAME** → провайдерский CNAME CDN-ресурса
-   - `www.proremont76.ru.` → **CNAME** → тот же адрес
-   - `_acme-challenge.proremont76.ru.` и `_acme-challenge.www.proremont76.ru.` → CNAME на
-     Certificate Manager (из шага 1) — сохранить, иначе через ~90 дней не продлится сертификат
-4. **reg.ru** — сменить NS-серверы домена на выданные зоной (`ns1.yandexcloud.net`,
-   `ns2.yandexcloud.net»): «Домены» → `proremont76.ru` → «DNS-серверы и управление зоной» →
-   «Изменить» → «Свой список DNS-серверов». Распространяется до суток.
-5. Проверить, что `https://proremont76.ru` и `https://www.proremont76.ru` открывают сайт с
-   валидным сертификатом.
-6. Домен уже прописан в коде (`astro.config.mjs`, `src/lib/site.ts`, `public/robots.txt`) —
-   после подключения CDN просто `npm run deploy:yandex`, дополнительных правок не требуется.
+Домен зарегистрирован на reg.ru. DNS-серверы домена — Beget (`ns1.beget.com`,
+`ns2.beget.com`, `ns1.beget.pro`, `ns2.beget.pro`), записи редактируются в панели Beget →
+«DNS». Сменить NS-серверы: reg.ru → «Домены» → `proremont76.ru` → «DNS-серверы и управление
+зоной» → «Изменить» → «Свой список DNS-серверов».
 
 Проект — набор статических файлов без бэкенда, подходит и для любого другого статического
-хостинга (Netlify, Vercel, обычный FTP/SSH-хостинг — залить содержимое `dist/` после
-`npm run build`).
+хостинга (залить содержимое `dist/` после `npm run build`).
 
 Осталось из плейсхолдеров (см. `CONTENT-TODO.md`):
 

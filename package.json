@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy:yandex": "astro build && aws s3 sync dist/ s3://pro-remont76-static/ --acl public-read --delete --profile yandex --endpoint-url https://storage.yandexcloud.net"
+    "deploy:beget": "astro build && bash scripts/deploy-beget.sh"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

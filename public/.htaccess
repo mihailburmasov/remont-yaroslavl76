@@ -1,0 +1,6 @@
+# Настройки хостинга Beget (Apache). Astro копирует файл из public/ в корень сборки,
+# scripts/deploy-beget.sh заливает его вместе с остальным dist/.
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset UTF-8
+ErrorDocument 404 /404.html
