@@ -66,7 +66,6 @@
 - Домен зарегистрирован на reg.ru.
 - Ресурсы в Yandex Cloud удалены 2026-10-12: CDN-ресурс, сертификат Certificate Manager и бакет
   `pro-remont76-static`. Осталась только DNS-зона (см. ниже).
-
 - 2026-10-12 на reg.ru NS-серверы домена сменены на `ns1.beget.com`, `ns2.beget.com`,
   `ns1.beget.pro`, `ns2.beget.pro`. На момент записи реестр .ru ещё отдавал старые
   `ns1/ns2.yandexcloud.net` — reg.ru передаёт изменение с задержкой. Сайт при этом работает: обе зоны
