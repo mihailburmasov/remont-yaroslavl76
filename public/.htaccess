@@ -4,3 +4,16 @@ DirectoryIndex index.html
 Options -Indexes
 AddDefaultCharset UTF-8
 ErrorDocument 404 /404.html
+
+# Один адрес сайта: https://proremont76.ru. Beget передаёт протокол в Apache,
+# поэтому %{HTTPS} за его nginx работает как обычно.
+RewriteEngine On
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://proremont76.ru%{REQUEST_URI} [R=301,L]
+
+# Адрес папки без слэша (/uslugi) сразу ведём на https-адрес со слэшем,
+# а не через встроенный редирект Apache.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^ https://proremont76.ru%{REQUEST_URI}/ [R=301,L]
